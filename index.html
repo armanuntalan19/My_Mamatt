@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 4th Anniversary 💕</title>
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="confetti.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Falling tulip petals -->
+  <div class="tulip-confetti-field" id="confettiField"></div>
+
+  <!-- Fixed corner tulips -->
+  <div class="tulip-float tf-1" aria-hidden="true"></div>
+  <div class="tulip-float tf-2" aria-hidden="true"></div>
+  <div class="tulip-float tf-3" aria-hidden="true"></div>
+  <div class="tulip-float tf-4" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════
+       COVER PAGE
+       Swipe left or click the arrow → page2.html
+       ══════════════════════════════════════════════ -->
+  <main class="cover-stage" id="coverStage">
+    <div class="cover-inner">
+
+      <!-- Tulip bouquet rendered by script.js -->
+      <div class="cover-bouquet" id="coverBouquet" aria-hidden="true"></div>
+
+      <p class="cover-eyebrow">with all my heart</p>
+
+      <h1 class="cover-title">
+        Happy<br><em>Anniversary</em>
+      </h1>
+
+      <div class="cover-years">4</div>
+
+      <p class="cover-sub">years of us &nbsp;·&nbsp; years of love</p>
+
+      <!-- Swipe / click hint -->
+      <div class="swipe-hint" id="swipeBtn" role="button" tabindex="0" aria-label="Open surprise">
+        <span>open the surprise</span>
+        <span class="swipe-arrow">→</span>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="confetti.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

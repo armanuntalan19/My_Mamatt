@@ -1,0 +1,523 @@
+/* ============================================================
+   style.css — Happy 4th Anniversary
+   Same design tokens, fonts, and tulip system as the love-
+   question page — just laid out as full-bleed stacked sections.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Caveat:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ink:     #2b1320;
+  --plum:    #6a1f4d;
+  --crimson: #d81159;
+  --coral:   #ef6351;
+  --gold:    #c9922e;
+  --leaf:    #3a6b4c;
+  --blush:   #f7e6e6;
+  --cream:   #fffaf5;
+
+  /* section alternating backgrounds */
+  --sec-a: #fdf1f4;
+  --sec-b: #fff7f0;
+  --sec-c: #f5edf8;
+}
+
+html, body {
+  overflow-x: hidden;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--ink);
+}
+
+/* ── COVER STAGE (index.html full-screen wrapper) ── */
+.cover-stage {
+  min-height: 100vh;
+  background:
+    radial-gradient(120% 90% at 50% -10%, #fdf1ea 0%, transparent 55%),
+    linear-gradient(165deg, var(--blush) 0%, #f3d3d6 45%, #e9b8c3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: grab;
+}
+
+/* ── HERO TULIPS ROW (page2.html sec 1) ── */
+.hero-tulips {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 90px;
+  margin-bottom: 1rem;
+}
+
+/* ── FIXED CORNER TULIPS ── */
+.tulip-float {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2;
+  width: 46px;
+  opacity: 0.55;
+  animation: tulipDrift 6s ease-in-out infinite;
+}
+.tulip-float svg { display: block; width: 100%; height: auto; }
+.tf-1 { top: 6%;     left: 3%;   animation-delay: 0s;   animation-duration: 5.5s; }
+.tf-2 { top: 12%;    right: 4%;  animation-delay: 1s;   animation-duration: 7s;   width: 36px; }
+.tf-3 { bottom: 10%; left: 4%;   animation-delay: 2s;   animation-duration: 6.2s; width: 40px; }
+.tf-4 { bottom: 6%;  right: 5%;  animation-delay: 0.6s; animation-duration: 6.8s; width: 34px; }
+
+@keyframes tulipDrift {
+  0%   { transform: translateY(0px)  rotate(-6deg); }
+  30%  { transform: translateY(-12px) rotate(4deg); }
+  60%  { transform: translateY(-4px)  rotate(-3deg); }
+  100% { transform: translateY(0px)  rotate(-6deg); }
+}
+
+/* ════════════════════════════════════════════════
+   PAGE 1 — COVER  (handled by .cover-stage above)
+   ════════════════════════════════════════════════ */
+
+.cover-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cover-bouquet {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 110px;
+  margin-bottom: 0.5rem;
+}
+
+.cover-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: var(--crimson);
+  letter-spacing: 0.01em;
+}
+
+.cover-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 8vw, 6rem);
+  color: var(--plum);
+  line-height: 1.1;
+}
+
+.cover-title em {
+  font-style: italic;
+  color: var(--crimson);
+}
+
+.cover-years {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(4rem, 14vw, 9rem);
+  color: var(--gold);
+  line-height: 1;
+  filter: drop-shadow(0 2px 18px rgba(201,146,46,0.35));
+}
+
+.cover-sub {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--plum);
+  opacity: 0.7;
+  letter-spacing: 2px;
+}
+
+.swipe-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  color: var(--crimson);
+  opacity: 0.8;
+  margin-top: 1rem;
+  cursor: pointer;
+  animation: hintPulse 2s ease-in-out infinite;
+}
+
+.swipe-arrow {
+  font-size: 1.4rem;
+  animation: arrowSlide 1.4s ease-in-out infinite;
+}
+
+@keyframes arrowSlide {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(8px); }
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+
+/* ════════════════════════════════════════════════
+   PAGE 2 — SECTIONS  (page2.html, standalone)
+   Each section is a full-bleed block, zero gap.
+   ════════════════════════════════════════════════ */
+
+/* Every section fills the width completely, no space between */
+.sec {
+  width: 100%;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Alternating section backgrounds */
+.sec:nth-of-type(odd)  { background: var(--sec-a); }
+.sec:nth-of-type(even) { background: var(--sec-b); }
+
+/* Named overrides for first and last sections */
+.sec-hero { background: linear-gradient(165deg, var(--blush) 0%, #f3d3d6 100%) !important; }
+.sec:last-of-type { background: linear-gradient(165deg, #f3d3d6 0%, var(--blush) 100%) !important; }
+
+/* Inner content wrapper */
+.sec-inner {
+  width: 100%;
+  max-width: 860px;
+  padding: 3.5rem 2rem;
+}
+
+/* Section headings */
+.sec-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  color: var(--crimson);
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  color: var(--plum);
+  text-align: center;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.sec-title em {
+  font-style: italic;
+  color: var(--crimson);
+}
+
+.sec-rule {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+  border-radius: 2px;
+  margin: 0.6rem auto 2rem;
+}
+
+/* ── SEC 1 — Page 2 Hero ── */
+.p2-hero {
+  min-height: 320px;
+  text-align: center;
+}
+
+.p2-hero .sec-inner {
+  padding: 4rem 2rem;
+}
+
+/* ── SEC — Song ── */
+.song-card {
+  background: rgba(255,255,255,0.7);
+  border: 1.5px solid rgba(106,31,77,0.12);
+  border-radius: 24px;
+  padding: 2.2rem 2rem;
+  text-align: center;
+  box-shadow: 0 12px 40px -12px rgba(106,31,77,0.18);
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+}
+
+.song-card::before {
+  content: '♪';
+  position: absolute;
+  font-size: 9rem;
+  color: var(--blush);
+  top: -1.5rem;
+  right: -1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.song-name {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.7rem;
+  color: var(--plum);
+  margin-bottom: 0.2rem;
+}
+
+.song-artist {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  color: var(--crimson);
+  margin-bottom: 1.4rem;
+}
+
+.song-card audio {
+  width: 100%;
+  max-width: 420px;
+  accent-color: var(--crimson);
+  border-radius: 30px;
+}
+
+.song-lyric {
+  font-family: 'Caveat', cursive;
+  font-size: 1.25rem;
+  color: var(--plum);
+  margin-top: 1.1rem;
+  opacity: 0.75;
+}
+
+/* ── SEC — Photo Grid ── */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+}
+
+.photo-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px rgba(106,31,77,0.18),
+    0 10px 28px -8px rgba(106,31,77,0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-frame:hover {
+  transform: scale(1.03) rotate(0.4deg);
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px var(--crimson),
+    0 14px 36px -8px rgba(216,17,89,0.3);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--blush), #f3d3d6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2.4rem;
+  color: var(--plum);
+}
+
+.photo-placeholder small {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.75rem;
+  color: var(--plum);
+  opacity: 0.6;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* ── SEC — Story ── */
+.story-card {
+  background: rgba(255,255,255,0.75);
+  border-left: 5px solid var(--crimson);
+  border-radius: 0 20px 20px 0;
+  padding: 2rem 2rem 2rem 2.5rem;
+  box-shadow: 0 10px 32px -10px rgba(106,31,77,0.16);
+  position: relative;
+}
+
+.story-card::before {
+  content: '\201C';
+  font-family: 'Fraunces', serif;
+  font-size: 8rem;
+  color: var(--blush);
+  position: absolute;
+  top: -2rem;
+  left: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.story-card p {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.95;
+  color: var(--ink);
+  opacity: 0.85;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.story-card p:last-child { margin-bottom: 0; }
+
+/* ── SEC — Things I Love ── */
+.loves-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+}
+
+.love-card {
+  background: rgba(255,255,255,0.8);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -8px rgba(106,31,77,0.16);
+  border: 1.5px solid rgba(106,31,77,0.1);
+  transition: transform 0.3s ease;
+}
+
+.love-card:hover { transform: translateY(-4px); }
+
+.love-photo-slot {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--blush), #f3d3d6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+}
+
+.love-photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.love-body {
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.love-num {
+  font-family: 'Caveat', cursive;
+  font-size: 0.95rem;
+  color: var(--crimson);
+  margin-bottom: 0.2rem;
+}
+
+.love-body p {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+/* ── SEC — Video ── */
+.video-frame {
+  width: 100%;
+  max-width: 680px;
+  border-radius: 22px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow:
+    0 0 0 4px #fff,
+    0 0 0 8px rgba(106,31,77,0.15),
+    0 16px 48px -12px rgba(106,31,77,0.28);
+}
+
+.video-frame video {
+  width: 100%;
+  display: block;
+}
+
+.video-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--blush), #f3d3d6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 3rem;
+  color: var(--plum);
+}
+
+.video-placeholder small {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.8rem;
+  color: var(--plum);
+  opacity: 0.6;
+}
+
+/* ── SEC — Message ── */
+.message-card {
+  background: rgba(255,255,255,0.78);
+  border: 1.5px solid rgba(106,31,77,0.12);
+  border-radius: 24px;
+  padding: 2.5rem 2.2rem;
+  box-shadow: 0 12px 40px -12px rgba(106,31,77,0.18);
+  text-align: left;
+  position: relative;
+}
+
+.message-card::after {
+  content: '💌';
+  position: absolute;
+  top: -1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+}
+
+.message-card p {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.95;
+  color: var(--ink);
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+.message-card p:last-of-type { margin-bottom: 0; }
+
+.message-sign {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--crimson);
+  margin-top: 1.2rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 520px) {
+  .photo-grid,
+  .loves-grid { grid-template-columns: 1fr; }
+  .tulip-float { display: none; }
+}

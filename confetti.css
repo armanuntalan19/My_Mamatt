@@ -1,0 +1,41 @@
+/* ============================================================
+   confetti.css — shared falling-tulip effect
+   Loaded by both index.html and happy_monthsary.html so the
+   confetti looks and behaves exactly the same on each page.
+   ============================================================ */
+
+.tulip-confetti-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.tulip-petal {
+  position: absolute;
+  top: -64px;
+  opacity: 0;
+  animation-name: tulipFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+.tulip-petal svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+}
+
+@keyframes tulipFall {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.9; }
+  90%  { opacity: 0.55; }
+  100% { transform: translate(var(--drift), 118vh) rotate(var(--rot)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tulip-petal { animation: none; opacity: 0; }
+}
