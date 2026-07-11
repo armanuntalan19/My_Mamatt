@@ -57,22 +57,45 @@
       <h2 class="sec-title">Reminds Me of <em>You</em></h2>
       <div class="sec-rule"></div>
 
-      <div class="song-card">
-        <p class="song-name">Those Eyes</p>
-        <p class="song-artist">New West</p>
+      <div class="song-card" id="songSection">
 
-        <!--
-          ✏️  ADD YOUR SONG:
-          1. Put your .mp3 in this folder.
-          2. Change "your-song.mp3" to your file name.
-        -->
-        <audio controls loop>
-          <source src="your-song.mp3" type="audio/mpeg" />
-          Your browser does not support audio.
-        </audio>
+          <!-- Hidden audio — controlled by JS -->
+          <audio id="songAudio" loop>
+            <source src="those-eyes.mp3" type="audio/mpeg" />
+          </audio>
 
-        <p class="song-lyric">"Those eyes, I could stare all day long…"</p>
-      </div>
+          <!-- Vinyl disc with cover art -->
+          <div class="vinyl-wrap" id="vinylWrap">
+            <div class="vinyl-disc" id="vinylDisc">
+              <div class="vinyl-ring r1"></div>
+              <div class="vinyl-ring r2"></div>
+              <div class="vinyl-ring r3"></div>
+              <div class="vinyl-label">
+                <img src="cover.jpg" alt="Those Eyes cover" class="vinyl-cover" />
+              </div>
+              <div class="vinyl-hole"></div>
+            </div>
+          </div>
+
+          <!-- Song info -->
+          <p class="song-name">Those Eyes</p>
+          <p class="song-artist">New West</p>
+
+          <!-- Custom controls -->
+          <div class="vinyl-controls">
+            <button class="vinyl-btn" id="playPauseBtn" aria-label="Play / Pause">
+              <span id="playIcon">▶</span>
+            </button>
+            <div class="vinyl-progress-wrap">
+              <div class="vinyl-progress-bar" id="progressBar">
+                <div class="vinyl-progress-fill" id="progressFill"></div>
+              </div>
+              <div class="vinyl-time" id="songTime">0:00 / 0:00</div>
+            </div>
+          </div>
+
+          <p class="song-lyric">"Those eyes, I could stare all day long…"</p>
+        </div>
     </div>
   </section>
 
