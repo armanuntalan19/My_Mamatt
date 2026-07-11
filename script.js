@@ -1,11 +1,11 @@
 /* ============================================================
    script.js — Cover page (index.html)
-   Swipe left or click → navigates to page2.html
+   Swipe left or click → navigates to my_love.html
    ============================================================ */
 
 // ── NAVIGATE TO PAGE 2 ──────────────────────────────────────
 function goToPage2() {
-  window.location.href = 'page2.html';
+  window.location.href = 'my_love.html';
 }
 
 // ── SWIPE + CLICK ────────────────────────────────────────────
