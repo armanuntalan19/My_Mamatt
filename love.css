@@ -323,11 +323,9 @@ html, body {
 }
 .vinyl-cover {
   width:100%; height:100%; object-fit:cover; display:block; border-radius:50%;
-  animation: vinylCounterSpin 3.2s linear infinite;
-  animation-play-state: paused;
 }
-.vinyl-disc.playing .vinyl-cover { animation-play-state: running; }
-@keyframes vinylCounterSpin { from{transform:rotate(0deg);} to{transform:rotate(-360deg);} }
+/* No separate animation here on purpose — the cover is nested inside .vinyl-disc,
+   so it spins together with the disc automatically via the parent's rotation. */
 
 .vinyl-hole {
   position:absolute; width:8px; height:8px; border-radius:50%;

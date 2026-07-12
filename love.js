@@ -28,11 +28,11 @@ function initVinyl() {
   function setPlay(state) {
     if (state) {
       audio.play().catch(()=>{});
-      disc.classList.add('playing');   // starts both vinylSpin + vinylCounterSpin
+      disc.classList.add('playing');   // starts vinylSpin — the cover spins with it, no separate animation needed
       playIcon.textContent = '⏸';
     } else {
       audio.pause();
-      disc.classList.remove('playing'); // pauses both animations immediately
+      disc.classList.remove('playing'); // pauses the spin immediately
       playIcon.textContent = '▶';
     }
   }
