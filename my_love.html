@@ -1,256 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You, My Love 💕</title>
-  <link rel="icon" type="image/png" href="icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="confetti.css" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Anniversary 💕</title>
+  <link rel="icon" type="image/png" href="icon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="love.css"/>
 </head>
 <body>
 
-  <!-- Falling tulip petals -->
-  <div class="tulip-confetti-field" id="confettiField"></div>
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-modal="true">
+    <button class="lb-close" id="lbClose">✕</button>
+    <img src="" alt="" id="lbImg" class="lb-img"/>
+  </div>
 
-  <!-- Fixed corner tulips -->
-  <div class="tulip-float tf-1" aria-hidden="true"></div>
-  <div class="tulip-float tf-2" aria-hidden="true"></div>
-  <div class="tulip-float tf-3" aria-hidden="true"></div>
-  <div class="tulip-float tf-4" aria-hidden="true"></div>
-
-  <!-- ══════════════════════════════════════════════
-       8 FULL-BLEED SECTIONS — zero gap between them
-       ══════════════════════════════════════════════ -->
-
-  <!-- ── 1. Hello Header ── -->
-  <section class="sec sec-hero">
-    <div class="sec-inner" style="text-align:center;">
-      <div class="hero-tulips" id="heroTulips" aria-hidden="true"></div>
-      <p class="sec-eyebrow">hello, my love</p>
-      <h2 class="sec-title">This is <em>for you</em></h2>
-      <div class="sec-rule"></div>
-      <p style="font-family:'Work Sans',sans-serif;font-size:1.05rem;color:var(--plum);opacity:0.75;line-height:1.8;">
-        Four years. Countless moments. One page made just for you.
-      </p>
+  <!-- SEC 1 — HELLO -->
+  <section class="sec sec-hero" id="sec1">
+    <img src="lace-heart.svg" class="sdeco sh-heart sh-heart-1" aria-hidden="true" alt=""/>
+    <img src="lace-heart.svg" class="sdeco sh-heart sh-heart-2" aria-hidden="true" alt=""/>
+    <img src="gem-chain.svg"  class="sdeco sh-chain sh-chain-1" aria-hidden="true" alt=""/>
+    <img src="ribbon.png"     class="sdeco sh-ribbon"           aria-hidden="true" alt=""/>
+    <img src="tulip1.png"     class="sdeco sec-tulip-l"         aria-hidden="true" alt=""/>
+    <img src="tulip2.png"     class="sdeco sec-tulip-r"         aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in">
+      <p class="hero-eyebrow">hello, my love</p>
+      <h1 class="hero-title">
+        <span class="ht-this">This is</span>
+        <em class="ht-for">for you</em>
+      </h1>
+      <div class="hero-divider"><span></span><span class="hd-diamond">◆</span><span></span></div>
+      <p class="hero-sub">Four years. Countless moments. One page made just for you.</p>
     </div>
   </section>
 
-  <!-- ── 2. Let's Start From ── -->
-  <section class="sec">
-    <div class="sec-inner" style="text-align:center;">
+  <!-- SEC 2 — LET'S START FROM -->
+  <section class="sec sec-start" id="sec2">
+    <img src="tulip3.png"    class="sdeco s2-tulip-l" aria-hidden="true" alt=""/>
+    <img src="tulip2.png"    class="sdeco s2-tulip-r" aria-hidden="true" alt=""/>
+    <img src="gem-chain.svg" class="sdeco s2-chain"   aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in" style="text-align:center;">
       <p class="sec-eyebrow">let's go back</p>
-      <h2 class="sec-title">Let's Start From...</h2>
-      <div class="sec-rule"></div>
-      <p style="font-family:'Work Sans',sans-serif;font-size:1.05rem;color:var(--ink);opacity:0.8;line-height:1.9;max-width:560px;margin:0 auto;">
-        Four years ago, something beautiful began — <em style="color:var(--crimson);">us.</em><br>
+      <h2 class="sec-title">Let's Start From<em class="accent-dot">...</em></h2>
+      <div class="title-rule"></div>
+      <p class="sec-body" style="max-width:560px;margin:0 auto;">
+        Four years ago, something beautiful began — <span class="accent">us.</span><br>
         Scroll through this little letter and remember every piece of it.
       </p>
     </div>
   </section>
 
-  <!-- ── 3. The Song ── -->
-  <section class="sec">
-    <div class="sec-inner">
-      <p class="sec-eyebrow">the song that</p>
-      <h2 class="sec-title">Reminds Me of <em>You</em></h2>
-      <div class="sec-rule"></div>
-
-      <div class="song-card" id="songSection">
-
-          <!-- Hidden audio — controlled by JS -->
-          <audio id="songAudio" loop>
-            <source src="those-eyes.mp3" type="audio/mpeg" />
-          </audio>
-
-          <!-- Vinyl disc with cover art -->
-          <div class="vinyl-wrap" id="vinylWrap">
+  <!-- SEC 3 — THE SONG -->
+  <section class="sec sec-song" id="sec3">
+    <img src="tulip1.png"    class="sdeco s3-tulip-l"   aria-hidden="true" alt=""/>
+    <img src="tulip2.png"    class="sdeco s3-tulip-r"   aria-hidden="true" alt=""/>
+    <img src="gem-chain.svg" class="sdeco s3-chain"     aria-hidden="true" alt=""/>
+    <img src="disc.png"      class="sdeco s3-disc-deco" aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in">
+      <p class="sec-eyebrow">the song that reminds me of you</p>
+      <h2 class="sec-title"><em>Those Eyes</em></h2>
+      <div class="title-rule"></div>
+      <div class="vinyl-section">
+        <div class="vinyl-aes-frame">
+          <audio id="songAudio" loop><source src="those-eyes.mp3" type="audio/mpeg"/></audio>
+          <div class="vinyl-wrap">
             <div class="vinyl-disc" id="vinylDisc">
               <div class="vinyl-ring r1"></div>
               <div class="vinyl-ring r2"></div>
               <div class="vinyl-ring r3"></div>
               <div class="vinyl-label">
-                <img src="cover.jpg" alt="Those Eyes cover" class="vinyl-cover" />
+                <img src="cover.jpg" alt="cover" class="vinyl-cover" id="vinylCover"/>
               </div>
               <div class="vinyl-hole"></div>
             </div>
           </div>
-
-          <!-- Song info -->
+        </div>
+        <div class="vinyl-info">
           <p class="song-name">Those Eyes</p>
           <p class="song-artist">New West</p>
-
-          <!-- Custom controls -->
           <div class="vinyl-controls">
-            <button class="vinyl-btn" id="playPauseBtn" aria-label="Play / Pause">
-              <span id="playIcon">▶</span>
-            </button>
+            <button class="vinyl-btn" id="playPauseBtn" aria-label="Play/Pause"><span id="playIcon">▶</span></button>
             <div class="vinyl-progress-wrap">
               <div class="vinyl-progress-bar" id="progressBar">
                 <div class="vinyl-progress-fill" id="progressFill"></div>
               </div>
-              <div class="vinyl-time" id="songTime">0:00 / 0:00</div>
+              <span class="vinyl-time" id="songTime">0:00 / 0:00</span>
             </div>
           </div>
-
           <p class="song-lyric">"Those eyes, I could stare all day long…"</p>
         </div>
+      </div>
     </div>
   </section>
 
-  <!-- ── 4. Photos ── -->
-  <section class="sec">
-    <div class="sec-inner">
+  <!-- SEC 4 — PHOTOS -->
+  <section class="sec sec-photos" id="sec4">
+    <img src="tulip3.png"    class="sdeco s4-tulip-l" aria-hidden="true" alt=""/>
+    <img src="tulip2.png"    class="sdeco s4-tulip-r" aria-hidden="true" alt=""/>
+    <img src="lace-heart.svg" class="sdeco s4-heart"  aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in">
       <p class="sec-eyebrow">captured</p>
       <h2 class="sec-title">Us, In <em>Frames</em></h2>
-      <div class="sec-rule"></div>
-
+      <div class="title-rule"></div>
       <div class="photo-grid">
-        <!--
-          ✏️  ADD YOUR PHOTOS:
-          Replace each .photo-placeholder div with:
-          <img src="photo1.jpg" alt="us" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        -->
-        <div class="photo-frame">
-          <div class="photo-placeholder">🌷<small>Add photo1.jpg</small></div>
+        <div class="photo-frame-wrap" onclick="openLightbox(this)">
+          <div class="pf-mat"><div class="pf-inner photo-placeholder">🌷<small>photo1.jpg</small></div></div>
+          <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
         </div>
-        <div class="photo-frame">
-          <div class="photo-placeholder">💗<small>Add photo2.jpg</small></div>
+        <div class="photo-frame-wrap" onclick="openLightbox(this)">
+          <div class="pf-mat"><div class="pf-inner photo-placeholder">💗<small>photo2.jpg</small></div></div>
+          <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
         </div>
-        <div class="photo-frame">
-          <div class="photo-placeholder">🌸<small>Add photo3.jpg</small></div>
+        <div class="photo-frame-wrap" onclick="openLightbox(this)">
+          <div class="pf-mat"><div class="pf-inner photo-placeholder">🌸<small>photo3.jpg</small></div></div>
+          <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
         </div>
-        <div class="photo-frame">
-          <div class="photo-placeholder">✨<small>Add photo4.jpg</small></div>
+        <div class="photo-frame-wrap" onclick="openLightbox(this)">
+          <div class="pf-mat"><div class="pf-inner photo-placeholder">✨<small>photo4.jpg</small></div></div>
+          <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 5. Our Story ── -->
-  <section class="sec">
-    <div class="sec-inner">
+  <!-- SEC 5 — OUR STORY -->
+  <section class="sec sec-story" id="sec5">
+    <img src="tulip1.png"    class="sdeco s5-tulip-l" aria-hidden="true" alt=""/>
+    <img src="tulip2.png"    class="sdeco s5-tulip-r" aria-hidden="true" alt=""/>
+    <img src="gem-chain.svg" class="sdeco s5-chain"   aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in">
       <p class="sec-eyebrow">how it began</p>
       <h2 class="sec-title">The Story of <em>Us</em></h2>
-      <div class="sec-rule"></div>
-
-      <div class="story-card">
-        <!--  ✏️  Edit the <p> tags below to write your own story. -->
-        <p>
-          It started with a simple hello — or maybe it was a glance, a smile,
-          a moment that neither of us planned but both of us felt. The kind of
-          beginning that you only recognise as <em>the</em> beginning when you're
-          looking back on it four years later.
-        </p>
-        <p>
-          I remember thinking you were different. There was something in the way
-          you laughed, the way you cared, the way you made ordinary moments feel
-          like the best parts of my life. And I was right.
-        </p>
-        <p>
-          Four years later, here we are — still growing, still choosing each
-          other, still writing a story I never want to stop reading.
-        </p>
+      <div class="title-rule"></div>
+      <div class="story-frame">
+        <span class="sf-c sf-c-tl"></span><span class="sf-c sf-c-tr"></span>
+        <span class="sf-c sf-c-bl"></span><span class="sf-c sf-c-br"></span>
+        <div class="story-inner">
+          <span class="story-open-quote">"</span>
+          <p>It started with a simple hello — or maybe it was a glance, a smile, a moment that neither of us planned but both of us felt. The kind of beginning that you only recognise as <em>the</em> beginning when you're looking back on it four years later.</p>
+          <p>I remember thinking you were different. There was something in the way you laughed, the way you cared, the way you made ordinary moments feel like the best parts of my life. And I was right.</p>
+          <p>Four years later, here we are — still growing, still choosing each other, still writing a story I never want to stop reading.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 6. Things I Love About You ── -->
-  <section class="sec">
-    <div class="sec-inner">
+  <!-- SEC 6 — THINGS I LOVE (alternating) -->
+  <section class="sec sec-loves" id="sec6">
+    <img src="tulip3.png"    class="sdeco s6-tulip-l" aria-hidden="true" alt=""/>
+    <img src="tulip2.png"    class="sdeco s6-tulip-r" aria-hidden="true" alt=""/>
+    <img src="lace-heart.svg" class="sdeco s6-heart"  aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in">
       <p class="sec-eyebrow">endlessly</p>
       <h2 class="sec-title">Things I <em>Love</em> About You</h2>
-      <div class="sec-rule"></div>
-
-      <div class="loves-grid">
-        <div class="love-card">
-          <!-- ✏️ Replace emoji div with: <img class="love-photo-slot" src="love1.jpg" alt="" /> -->
-          <div class="love-photo-slot">😊</div>
-          <div class="love-body">
-            <p class="love-num">01 ♥</p>
+      <div class="title-rule"></div>
+      <div class="loves-list">
+        <div class="love-row love-row-img-left">
+          <div class="love-img-wrap" onclick="openLightbox(this)">
+            <div class="pf-mat"><div class="pf-inner photo-placeholder">😊<small>love1.jpg</small></div></div>
+            <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
+          </div>
+          <div class="love-text">
+            <span class="love-num">01</span>
+            <h3 class="love-heading">Your Smile</h3>
             <p>The way you smile — it's the first thing I think of when I wake up and the last thing on my mind at night.</p>
           </div>
         </div>
-
-        <div class="love-card">
-          <div class="love-photo-slot">🫶</div>
-          <div class="love-body">
-            <p class="love-num">02 ♥</p>
+        <div class="love-row love-row-img-right">
+          <div class="love-text">
+            <span class="love-num">02</span>
+            <h3 class="love-heading">Your Kindness</h3>
             <p>How kind your heart is — you care so deeply, so quietly, without needing anyone to notice.</p>
           </div>
+          <div class="love-img-wrap" onclick="openLightbox(this)">
+            <div class="pf-mat"><div class="pf-inner photo-placeholder">🫶<small>love2.jpg</small></div></div>
+            <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
+          </div>
         </div>
-
-        <div class="love-card">
-          <div class="love-photo-slot">🌸</div>
-          <div class="love-body">
-            <p class="love-num">03 ♥</p>
+        <div class="love-row love-row-img-left">
+          <div class="love-img-wrap" onclick="openLightbox(this)">
+            <div class="pf-mat"><div class="pf-inner photo-placeholder">🌸<small>love3.jpg</small></div></div>
+            <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
+          </div>
+          <div class="love-text">
+            <span class="love-num">03</span>
+            <h3 class="love-heading">Your Safety</h3>
             <p>The way you make me feel safe — like no matter what, everything will be okay as long as we're together.</p>
           </div>
         </div>
-
-        <div class="love-card">
-          <div class="love-photo-slot">✨</div>
-          <div class="love-body">
-            <p class="love-num">04 ♥</p>
+        <div class="love-row love-row-img-right">
+          <div class="love-text">
+            <span class="love-num">04</span>
+            <h3 class="love-heading">Your Presence</h3>
             <p>You make every single day better just by being in it. That is not a small thing — that is everything.</p>
+          </div>
+          <div class="love-img-wrap" onclick="openLightbox(this)">
+            <div class="pf-mat"><div class="pf-inner photo-placeholder">✨<small>love4.jpg</small></div></div>
+            <span class="pf-c pf-c-tr"></span><span class="pf-c pf-c-bl"></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 7. Favorite Video ── -->
-  <section class="sec">
-    <div class="sec-inner" style="text-align:center;">
+  <!-- SEC 7 — VIDEO -->
+  <section class="sec sec-video" id="sec7">
+    <img src="tulip1.png"    class="sdeco s7-tulip-l" aria-hidden="true" alt=""/>
+    <img src="tulip2.png"    class="sdeco s7-tulip-r" aria-hidden="true" alt=""/>
+    <img src="gem-chain.svg" class="sdeco s7-chain"   aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in" style="text-align:center;">
       <p class="sec-eyebrow">play it again</p>
       <h2 class="sec-title">Our Favorite <em>Video</em></h2>
-      <div class="sec-rule"></div>
-
-      <div class="video-frame">
-        <!--
-          ✏️  ADD YOUR VIDEO:
-          1. Put your .mp4 in this folder.
-          2. Change "your-video.mp4" to your file name.
-        -->
-        <video controls loop playsinline
-          onerror="this.parentElement.innerHTML='<div class=\'video-placeholder\'>🎬<small>Add your-video.mp4</small></div>'">
-          <source src="your-video.mp4" type="video/mp4" />
-        </video>
+      <div class="title-rule"></div>
+      <div class="video-frame-wrap">
+        <span class="sf-c sf-c-tl"></span><span class="sf-c sf-c-tr"></span>
+        <span class="sf-c sf-c-bl"></span><span class="sf-c sf-c-br"></span>
+        <div class="video-mat">
+          <video class="vid-player" controls loop playsinline
+            onerror="this.parentElement.innerHTML='<div class=&quot;vid-ph&quot;>🎬<small>Add your-video.mp4</small></div>'">
+            <source src="your-video.mp4" type="video/mp4"/>
+          </video>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 8. My Message ── -->
-  <section class="sec">
-    <div class="sec-inner">
+  <!-- SEC 8 — MESSAGE ENVELOPE -->
+  <section class="sec sec-message" id="sec8">
+    <img src="tulip3.png"     class="sdeco s8-tulip-l" aria-hidden="true" alt=""/>
+    <img src="tulip2.png"     class="sdeco s8-tulip-r" aria-hidden="true" alt=""/>
+    <img src="lace-heart.svg" class="sdeco s8-heart"   aria-hidden="true" alt=""/>
+    <div class="sec-inner fade-in" style="text-align:center;">
       <p class="sec-eyebrow">from me, to you</p>
       <h2 class="sec-title">My <em>Message</em></h2>
-      <div class="sec-rule"></div>
-
-      <div class="message-card">
-        <!--  ✏️  Edit the <p> tags below to write your own message. -->
-        <p>
-          I don't say it enough, but I feel it every single day —
-          how incredibly lucky I am to have you. Not just on anniversaries
-          or special days, but on all the regular ones where you still
-          somehow make everything extraordinary.
-        </p>
-        <p>
-          Thank you for choosing me, again and again. Thank you for your
-          patience, your warmth, your laughter, and the way you love me
-          even when I'm hard to love.
-        </p>
-        <p>
-          Here's to four years of us, and to every year that comes after.
-          I love you more than words can hold — but I'll keep trying to show you.
-        </p>
-        <span class="message-sign">Forever yours, with love 🌷</span>
+      <div class="title-rule"></div>
+      <div class="envelope-scene" id="envelopeScene">
+        <div class="envelope" id="envelope" onclick="openEnvelope()">
+          <div class="env-body">
+            <div class="env-flap" id="envFlap"></div>
+            <div class="env-fold env-fold-l"></div>
+            <div class="env-fold env-fold-r"></div>
+            <div class="env-fold env-fold-b"></div>
+            <div class="env-seal"><span>💌</span></div>
+          </div>
+          <p class="env-hint">tap to open</p>
+        </div>
+        <div class="letter" id="letter">
+          <div class="letter-frame">
+            <span class="sf-c sf-c-tl"></span><span class="sf-c sf-c-tr"></span>
+            <span class="sf-c sf-c-bl"></span><span class="sf-c sf-c-br"></span>
+            <div class="letter-inner">
+              <p class="letter-salutation">My love,</p>
+              <p>I don't say it enough, but I feel it every single day — how incredibly lucky I am to have you. Not just on anniversaries or special days, but on all the regular ones where you still somehow make everything extraordinary.</p>
+              <p>Thank you for choosing me, again and again. Thank you for your patience, your warmth, your laughter, and the way you love me even when I'm hard to love.</p>
+              <p>Here's to four years of us, and to every year that comes after. I love you more than words can hold — but I'll keep trying to show you.</p>
+              <span class="letter-sign">Forever yours, with love 🌷</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <script src="confetti.js"></script>
-  <script src="page2-script.js"></script>
+  <script src="love.js"></script>
 </body>
 </html>

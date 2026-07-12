@@ -1,0 +1,265 @@
+/* ============================================================
+   cover.css — Happy 4th Anniversary Cover Page
+   Completely new design, different pink palette
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --rose:       #e8537a;
+  --rose-deep:  #c23b6a;
+  --rose-pale:  #f7ccd8;
+  --blush:      #fde8ef;
+  --blush2:     #f9d0df;
+  --dusty:      #d4748e;
+  --cream:      #fff8fb;
+  --ink:        #3a1828;
+}
+
+html, body {
+  overflow-x: hidden;
+  font-family: 'Jost', sans-serif;
+  background: var(--blush);
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #fce8ef 0%, transparent 65%),
+    linear-gradient(170deg, #fde8ef 0%, #f9d0df 40%, #f0b8cc 75%, #e8a0bc 100%);
+  cursor: grab;
+}
+
+/* ── DECORATIVE ELEMENTS ── */
+.deco {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Lace hearts */
+.deco-heart {
+  opacity: 0.45;
+  animation: floatGently 5s ease-in-out infinite;
+}
+.deco-heart-1 {
+  width: clamp(80px, 14vw, 160px);
+  top: 4%; left: 5%;
+  transform: rotate(-15deg);
+  animation-delay: 0s; animation-duration: 6s;
+}
+.deco-heart-2 {
+  width: clamp(55px, 9vw, 110px);
+  top: 10%; right: 8%;
+  transform: rotate(12deg);
+  animation-delay: 1.2s; animation-duration: 5s;
+}
+.deco-heart-3 {
+  width: clamp(40px, 7vw, 80px);
+  bottom: 15%; left: 12%;
+  transform: rotate(-8deg);
+  animation-delay: 2.5s; animation-duration: 7s;
+}
+
+/* Gem chains */
+.deco-chain {
+  opacity: 0.35;
+  animation: floatGently 7s ease-in-out infinite;
+}
+.deco-chain-1 {
+  width: clamp(120px, 22vw, 280px);
+  top: -20px; left: 30%;
+  transform: rotate(5deg);
+  animation-delay: 0.5s;
+}
+.deco-chain-2 {
+  width: clamp(80px, 15vw, 180px);
+  bottom: 5%; right: 20%;
+  transform: rotate(-10deg) scaleX(-1);
+  animation-delay: 2s; animation-duration: 6s;
+}
+
+/* Ribbons */
+.deco-ribbon {
+  animation: floatGently 5.5s ease-in-out infinite;
+}
+.deco-ribbon-1 {
+  width: clamp(90px, 13vw, 160px);
+  top: 5%; right: 3%;
+  transform: rotate(10deg);
+  opacity: 0.8;
+  animation-delay: 0.8s;
+}
+.deco-ribbon-2 {
+  width: clamp(60px, 9vw, 110px);
+  bottom: 8%; left: 4%;
+  transform: rotate(-20deg);
+  opacity: 0.65;
+  animation-delay: 3s; animation-duration: 7s;
+}
+
+/* Tulip left */
+.deco-tulip-cover-l {
+  width: clamp(160px, 28vw, 340px);
+  bottom: -20px; left: -40px;
+  transform: rotate(8deg);
+  animation: floatGently 8s ease-in-out infinite;
+  animation-delay: 1s;
+  opacity: 0.92;
+  z-index: 0;
+}
+/* Tulip right — always on right, slightly cropped */
+.deco-tulip-cover-r {
+  width: clamp(180px, 30vw, 380px);
+  bottom: -30px; right: -60px;
+  transform: rotate(-6deg);
+  animation: floatGently 7s ease-in-out infinite;
+  animation-delay: 2s;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+/* ── CENTER CONTENT ── */
+.cover-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 2rem;
+}
+
+.cover-eyebrow {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--rose-deep);
+  opacity: 0.85;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+
+.cover-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  margin: 0.2rem 0;
+}
+
+.ct-happy {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  color: var(--ink);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.ct-anni {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(3.2rem, 9vw, 7rem);
+  color: var(--rose-deep);
+  line-height: 1;
+  text-shadow: 0 2px 24px rgba(194,59,106,0.18);
+}
+
+.cover-years {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(5rem, 18vw, 11rem);
+  color: var(--rose);
+  line-height: 0.9;
+  text-shadow: 0 4px 32px rgba(232,83,122,0.25);
+  margin: 0.1rem 0;
+}
+
+.cover-sub {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+  color: var(--dusty);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ── BUTTON ── */
+.swipe-btn {
+  margin-top: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, var(--rose-deep), var(--rose));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.85rem 2.2rem;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(194,59,106,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: hintPulse 2.5s ease-in-out infinite;
+}
+.swipe-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 36px rgba(194,59,106,0.48);
+}
+.swipe-btn svg {
+  animation: arrowSlide 1.4s ease-in-out infinite;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes floatGently {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  40%       { transform: translateY(-14px) rotate(var(--r, 0deg)); }
+  70%       { transform: translateY(-6px) rotate(var(--r, 0deg)); }
+}
+
+.float-text {
+  animation: floatGently 6s ease-in-out infinite;
+}
+.float-num {
+  animation: floatGently 5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes arrowSlide {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(5px); }
+}
+
+@keyframes hintPulse {
+  0%, 100% { box-shadow: 0 8px 28px rgba(194,59,106,0.35); }
+  50%       { box-shadow: 0 10px 38px rgba(194,59,106,0.55); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .deco-chain-1 { width: clamp(100px, 40vw, 200px); }
+  .deco-tulip-cover-l { width: clamp(140px, 38vw, 260px); left: -30px; }
+  .deco-tulip-cover-r { width: clamp(160px, 42vw, 300px); right: -50px; }
+}
+
+@media (max-width: 480px) {
+  .deco-heart-3 { display: none; }
+  .deco-chain-2 { display: none; }
+  .deco-tulip-cover-l { width: 150px; }
+  .deco-tulip-cover-r { width: 170px; }
+}
