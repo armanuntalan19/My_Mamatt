@@ -75,14 +75,50 @@ html, body {
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
-.sec-hero    { background: var(--s1-bg); min-height: 100vh; }
-.sec-start   { background: var(--s2-bg); }
-.sec-song    { background: var(--s3-bg); }
-.sec-photos  { background: var(--s4-bg); }
-.sec-story   { background: var(--s5-bg); }
-.sec-loves   { background: var(--s6-bg); }
-.sec-video   { background: var(--s7-bg); }
-.sec-message { background: var(--s8-bg); }
+.sec-hero {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.55) 1.4px, transparent 0), var(--s1-bg);
+  background-size: 26px 26px, cover;
+  background-position: 0 0, center;
+  min-height: 100vh;
+}
+.sec-start {
+  background-color: var(--s2-bg);
+  background-image: repeating-linear-gradient(45deg, rgba(194,59,106,0.05) 0 2px, transparent 2px 16px);
+}
+.sec-song {
+  background-image: repeating-radial-gradient(circle at 50% 50%, rgba(194,59,106,0.06) 0 1px, transparent 1px 11px), var(--s3-bg);
+  background-size: 42px 42px, cover;
+}
+.sec-photos {
+  background-color: var(--s4-bg);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(201,127,160,0.07) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, rgba(201,127,160,0.07) 0 1px, transparent 1px 22px);
+}
+.sec-story {
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.4) 0 1px, transparent 1px 7px), var(--s5-bg);
+  background-size: auto, cover;
+}
+.sec-loves {
+  background-color: var(--s6-bg);
+  background-image:
+    radial-gradient(rgba(232,83,122,0.09) 2px, transparent 2.5px),
+    radial-gradient(rgba(232,83,122,0.06) 1.5px, transparent 2px);
+  background-size: 34px 34px, 34px 34px;
+  background-position: 0 0, 17px 17px;
+}
+.sec-video {
+  background-image: repeating-radial-gradient(circle at 0 50%, transparent 0 8px, rgba(255,255,255,0.24) 8px 10px), var(--s7-bg);
+  background-size: 20px 20px, cover;
+}
+.sec-message {
+  background-image:
+    radial-gradient(rgba(201,146,46,0.11) 1.5px, transparent 2px),
+    radial-gradient(rgba(232,83,122,0.08) 1px, transparent 1.5px),
+    var(--s8-bg);
+  background-size: 46px 46px, 30px 30px, cover;
+  background-position: 0 0, 15px 15px, center;
+}
 
 .sec-inner {
   width: 100%; max-width: 900px;
@@ -244,7 +280,7 @@ html, body {
    ═══════════════════════════════════════ */
 .photo-grid {
   display: grid; grid-template-columns: repeat(2,1fr);
-  gap: 1.8rem;
+  gap: clamp(0.9rem, 3vw, 1.8rem);
 }
 .photo-frame-wrap {
   position: relative; cursor: pointer;
@@ -393,7 +429,7 @@ html, body {
 .loves-list { display:flex; flex-direction:column; gap:3rem; }
 .love-row {
   display:grid; grid-template-columns:1fr 1fr;
-  gap:2.5rem; align-items:center;
+  gap: clamp(1rem, 4vw, 2.5rem); align-items:center;
 }
 .love-row-img-right .love-text { order:-1; }
 
@@ -558,8 +594,9 @@ html, body {
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — three tiers, each tuned on its
-   own terms rather than a scaled-down desktop.
+   RESPONSIVE — same layout as laptop at every
+   size (photo grid and love rows stay two-column);
+   only spacing/sizing scales fluidly.
    ═══════════════════════════════════════ */
 
 /* ── TABLET (≤1024px): content images grow, tulips get a
@@ -568,15 +605,12 @@ html, body {
 @media (max-width:1024px) {
   .sec-inner { max-width: 680px; padding: 4rem 2.4rem; }
 
-  .photo-grid { gap: 2rem; }
   .pf-mat { aspect-ratio: 5/4; }
 
   .vinyl-section { gap: 2.4rem; }
   .vinyl-wrap { width:clamp(210px,30vw,250px); height:clamp(210px,30vw,250px); }
 
   .video-frame-wrap { max-width: 620px; }
-
-  .love-row { gap: 2rem; }
 
   .s3-disc-deco { top:auto; bottom:4%; right:3%; width:clamp(110px,15vw,170px); }
 
@@ -590,24 +624,19 @@ html, body {
   }
 }
 
-/* ── LARGE PHONE / SMALL TABLET (≤768px): images become the
-   focal point — single-column photos and love rows so each
-   image is shown large, decor grows further and re-crops. ── */
+/* ── LARGE PHONE / SMALL TABLET (≤768px): photo grid and love
+   rows keep the same two-column layout as laptop, just scaled
+   down; decor grows further and re-crops. ── */
 @media (max-width:768px) {
   .sec-inner { padding: 3.8rem 1.6rem; }
 
-  .photo-grid { grid-template-columns: 1fr; gap: 2.2rem; max-width: 420px; margin: 0 auto; }
   .pf-mat { aspect-ratio: 4/3; }
 
-  .vinyl-section { gap: 2rem; }
-  .vinyl-wrap { width:clamp(190px,52vw,240px); height:clamp(190px,52vw,240px); }
+  .vinyl-section { gap: 1.6rem; }
+  .vinyl-wrap { width:clamp(140px,30vw,240px); height:clamp(140px,30vw,240px); }
+  .vinyl-controls { max-width: 240px; }
 
   .video-frame-wrap { max-width: 92vw; }
-
-  .love-row { grid-template-columns:1fr; gap:1.6rem; }
-  .love-row-img-right .love-text { order:0; }
-  .love-img-wrap { max-width: 380px; margin: 0 auto; }
-  .love-img-wrap .pf-mat { aspect-ratio:4/3; }
 
   .s3-disc-deco { bottom:2%; right:2%; width:clamp(100px,26vw,160px); opacity:.4; }
 
@@ -631,8 +660,11 @@ html, body {
    card edges — spacing tightens, image sizes don't. ── */
 @media (max-width:480px) {
   .sec-inner { padding: 3.4rem 1.3rem; }
-  .photo-grid { max-width: 100%; }
+  .photo-grid { max-width: 100%; gap: 0.7rem; }
+  .love-row { gap: 0.9rem; }
   .love-img-wrap { max-width: 100%; }
+  .photo-frame-wrap, .love-img-wrap { padding: 5px; }
+  .pf-c, .sf-c { width: 20px; height: 20px; }
 
   .s3-disc-deco { width:clamp(90px,24vw,140px); bottom:1%; right:1%; opacity:.35; }
 
