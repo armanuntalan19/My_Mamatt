@@ -51,21 +51,50 @@ function initVinyl() {
     audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
   });
 
-  // Autoplay once when the section first scrolls into view.
+  // Autoplay when the song section scrolls into view.
   // After that, playback is controlled only by the Pause button —
   // scrolling away must not stop the rotation or the audio.
+  //
+  // Browsers block unmuted autoplay until the visitor has made a real
+  // interaction (click/tap/key) somewhere on the page — a scroll alone
+  // often isn't enough, especially on desktop. So: try to play the moment
+  // the section is visible, and if the browser blocks it, catch the very
+  // next real interaction anywhere on the page and use it to start the
+  // song immediately (still gated on the section actually being in view).
+  let songInView = false;
+  let autoStarted = false;
+
+  function attemptAutoplay() {
+    if (autoStarted || !audio.paused) return;
+    const p = audio.play();
+    if (p && p.then) {
+      p.then(() => {
+        autoStarted = true;
+        disc.classList.add('playing');
+        playIcon.textContent = '⏸';
+      }).catch(() => { /* still blocked — will retry on next real interaction */ });
+    }
+  }
+
   const songSection = document.getElementById('sec3');
   if (songSection) {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          setPlay(true);
-          obs.unobserve(songSection);
+          songInView = true;
+          attemptAutoplay();
+          if (autoStarted) obs.unobserve(songSection);
         }
       });
     }, { threshold: 0.45 });
     obs.observe(songSection);
   }
+
+  ['pointerdown', 'touchend', 'keydown'].forEach(evt => {
+    document.addEventListener(evt, () => {
+      if (songInView && !autoStarted) attemptAutoplay();
+    }, { passive: true });
+  });
 }
 
 /* ── LIGHTBOX ──────────────────────────────────────────────── */
