@@ -51,11 +51,18 @@ function initVinyl() {
     audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
   });
 
-  // Autoplay when section enters view
+  // Autoplay once when the section first scrolls into view.
+  // After that, playback is controlled only by the Pause button —
+  // scrolling away must not stop the rotation or the audio.
   const songSection = document.getElementById('sec3');
   if (songSection) {
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { setPlay(e.isIntersecting); });
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setPlay(true);
+          obs.unobserve(songSection);
+        }
+      });
     }, { threshold: 0.45 });
     obs.observe(songSection);
   }
