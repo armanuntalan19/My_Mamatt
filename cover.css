@@ -169,12 +169,11 @@ html, body {
 }
 
 .ct-anni {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: clamp(3.2rem, 9vw, 7rem);
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-size: clamp(3.8rem, 10vw, 8rem);
   color: var(--rose-deep);
-  line-height: 1;
+  line-height: 1.1;
   text-shadow: 0 2px 24px rgba(194,59,106,0.18);
 }
 
@@ -252,14 +251,16 @@ html, body {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .deco-chain-1 { width: clamp(100px, 40vw, 200px); }
-  .deco-tulip-cover-l { width: clamp(140px, 38vw, 260px); left: -30px; }
-  .deco-tulip-cover-r { width: clamp(160px, 42vw, 300px); right: -50px; }
+  .deco-chain-1 { width: clamp(140px, 40vw, 220px); }
+  .deco-tulip-cover-l { width: clamp(180px, 42vw, 300px); left: -30px; }
+  .deco-tulip-cover-r { width: clamp(200px, 46vw, 340px); right: -50px; }
+  .deco-heart-1, .deco-heart-2 { width: clamp(90px, 18vw, 150px); }
+  .deco-ribbon-1, .deco-ribbon-2 { width: clamp(100px, 18vw, 170px); }
 }
 
 @media (max-width: 480px) {
-  .deco-heart-3 { display: none; }
-  .deco-chain-2 { display: none; }
-  .deco-tulip-cover-l { width: 150px; }
-  .deco-tulip-cover-r { width: 170px; }
+  .deco-heart-3 { width: 60px; opacity: .3; }
+  .deco-chain-2 { width: clamp(110px, 30vw, 160px); opacity: .22; }
+  .deco-tulip-cover-l { width: clamp(170px, 44vw, 220px); }
+  .deco-tulip-cover-r { width: clamp(190px, 48vw, 240px); }
 }
