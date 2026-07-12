@@ -27,6 +27,7 @@ function initVinyl() {
 
   function setPlay(state) {
     if (state) {
+      audio.muted = false;
       audio.play().catch(()=>{});
       disc.classList.add('playing');   // starts vinylSpin — the cover spins with it, no separate animation needed
       playIcon.textContent = '⏸';
@@ -55,24 +56,53 @@ function initVinyl() {
   // After that, playback is controlled only by the Pause button —
   // scrolling away must not stop the rotation or the audio.
   //
-  // Browsers block unmuted autoplay until the visitor has made a real
-  // interaction (click/tap/key) somewhere on the page — a scroll alone
-  // often isn't enough, especially on desktop. So: try to play the moment
-  // the section is visible, and if the browser blocks it, catch the very
-  // next real interaction anywhere on the page and use it to start the
-  // song immediately (still gated on the section actually being in view).
+  // Browsers reliably allow MUTED autoplay but usually block unmuted
+  // autoplay without a user gesture. To avoid the song silently failing
+  // to start, we try unmuted first; if that's blocked we immediately
+  // fall back to starting it muted (so the disc + timeline are already
+  // running) and unmute the instant the visitor makes any gesture
+  // anywhere on the page — no restart, it just gains sound.
   let songInView = false;
-  let autoStarted = false;
+  let unmuteArmed = false;
 
-  function attemptAutoplay() {
-    if (autoStarted || !audio.paused) return;
+  function markPlaying() {
+    disc.classList.add('playing');
+    playIcon.textContent = '⏸';
+  }
+
+  function armUnmuteOnGesture() {
+    if (unmuteArmed) return;
+    unmuteArmed = true;
+    const unmute = () => {
+      audio.muted = false;
+      if (audio.paused) audio.play().catch(()=>{});
+      ['pointerdown', 'touchend', 'keydown', 'scroll', 'wheel'].forEach(evt =>
+        document.removeEventListener(evt, unmute)
+      );
+    };
+    ['pointerdown', 'touchend', 'keydown', 'scroll', 'wheel'].forEach(evt =>
+      document.addEventListener(evt, unmute, { passive: true })
+    );
+  }
+
+  function startMutedFallback() {
+    if (!audio.paused) return;
+    audio.muted = true;
     const p = audio.play();
     if (p && p.then) {
-      p.then(() => {
-        autoStarted = true;
-        disc.classList.add('playing');
-        playIcon.textContent = '⏸';
-      }).catch(() => { /* still blocked — will retry on next real interaction */ });
+      p.then(() => { markPlaying(); armUnmuteOnGesture(); }).catch(() => {});
+    }
+  }
+
+  function attemptAutoplay() {
+    if (!audio.paused) return;
+    audio.muted = false;
+    const p = audio.play();
+    if (p && p.then) {
+      p.then(markPlaying).catch(startMutedFallback);
+    } else {
+      // Older browsers without a promise-based play(): assume it worked.
+      markPlaying();
     }
   }
 
@@ -80,21 +110,15 @@ function initVinyl() {
   if (songSection) {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
+        if (e.isIntersecting && !songInView) {
           songInView = true;
           attemptAutoplay();
-          if (autoStarted) obs.unobserve(songSection);
+          obs.unobserve(songSection);
         }
       });
     }, { threshold: 0.45 });
     obs.observe(songSection);
   }
-
-  ['pointerdown', 'touchend', 'keydown'].forEach(evt => {
-    document.addEventListener(evt, () => {
-      if (songInView && !autoStarted) attemptAutoplay();
-    }, { passive: true });
-  });
 }
 
 /* ── LIGHTBOX ──────────────────────────────────────────────── */
