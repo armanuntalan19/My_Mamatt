@@ -53,8 +53,8 @@ function initVinyl() {
   });
 
   // Autoplay when the song section scrolls into view.
-  // After that, playback is controlled only by the Pause button —
-  // scrolling away must not stop the rotation or the audio.
+  // After that, playback is controlled ONLY by the Pause button —
+  // scrolling away, switching tabs, etc. must never stop it.
   //
   // Browsers reliably allow MUTED autoplay but usually block unmuted
   // autoplay without a user gesture. To avoid the song silently failing
@@ -62,7 +62,6 @@ function initVinyl() {
   // fall back to starting it muted (so the disc + timeline are already
   // running) and unmute the instant the visitor makes any gesture
   // anywhere on the page — no restart, it just gains sound.
-  let songInView = false;
   let unmuteArmed = false;
 
   function markPlaying() {
@@ -110,10 +109,9 @@ function initVinyl() {
   if (songSection) {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting && !songInView) {
-          songInView = true;
+        if (e.isIntersecting) {
           attemptAutoplay();
-          obs.unobserve(songSection);
+          obs.unobserve(songSection); // only ever auto-triggers once — from here on, only the button controls playback
         }
       });
     }, { threshold: 0.45 });

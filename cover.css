@@ -246,6 +246,19 @@ html, body {
   .deco-ribbon-1 { width: clamp(70px, 11vw, 120px); }
 }
 
+/* IPAD LANDSCAPE — touch tablets held sideways run wider than the
+   ≤1024px tablet query above (roughly 1024–1366px), so without this
+   they fell through to full desktop sizing. Detected via pointer/hover
+   so real laptops in that width range are unaffected. */
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-width: 1366px) {
+  .deco-chain-1 { width: clamp(100px, 16vw, 170px); left: 26%; }
+  .deco-chain-2 { width: clamp(70px, 11vw, 130px); }
+  .deco-tulip-cover-l { width: clamp(135px, 18vw, 220px); left: -38px; }
+  .deco-tulip-cover-r { width: clamp(150px, 20vw, 245px); right: -50px; }
+  .deco-heart-1 { width: clamp(60px, 9vw, 100px); }
+  .deco-ribbon-1 { width: clamp(64px, 9vw, 108px); }
+}
+
 /* LARGE PHONE / SMALL TABLET (≤768px) — decorations shrink
    further so they read as accents, not competing shapes. */
 @media (max-width: 768px) {

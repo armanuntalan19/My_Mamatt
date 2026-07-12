@@ -146,9 +146,9 @@ html, body {
 .float-deco { animation: floatA 5s ease-in-out infinite; }
 
 /* ── SEC 1 hero decor ── */
-.sh-heart-1 { width:clamp(75px,13vw,150px); top:-2%; left:-2%; opacity:.6; animation:floatA 6s ease-in-out infinite; --rot:-19deg; }
-.sh-heart-2 { width:clamp(55px,10vw,110px);  top:-3%; right:-3%; opacity:.55; animation:floatA 5s ease-in-out infinite 1.5s; --rot:17deg; }
-.sh-chain-1 { width:clamp(100px,20vw,240px); top:-18px; left:27%; opacity:.45; animation:floatB 7s ease-in-out infinite; --rot:4deg; }
+.sh-heart-1 { width:clamp(75px,13vw,150px); top:3%; left:3%; opacity:.6; animation:floatA 6s ease-in-out infinite; --rot:-19deg; }
+.sh-heart-2 { width:clamp(55px,10vw,110px);  top:4%; right:4%; opacity:.55; animation:floatA 5s ease-in-out infinite 1.5s; --rot:17deg; }
+.sh-chain-1 { width:clamp(100px,20vw,240px); top:2%; left:27%; opacity:.6; animation:floatB 7s ease-in-out infinite; --rot:4deg; }
 .sh-ribbon  { width:clamp(80px,12vw,150px); bottom:6%; right:4%; opacity:.8; animation:floatA 5.5s ease-in-out infinite 0.8s; --rot:10deg; }
 .sec-tulip-l { width:clamp(160px,26vw,320px); bottom:-26px; left:-60px; opacity:.9; animation:floatA 8s ease-in-out infinite 1s; --rot:11deg; }
 .sec-tulip-r { width:clamp(180px,28vw,360px); bottom:-36px; right:-85px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-8deg; }
@@ -156,38 +156,38 @@ html, body {
 /* ── SEC 2 ── */
 .s2-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-52px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:13deg; }
 .s2-tulip-r { width:clamp(150px,22vw,300px); top:-28px; right:-72px; opacity:.82; animation:floatA 7s ease-in-out infinite 2s; --rot:-11deg; }
-.s2-chain   { width:clamp(80px,15vw,180px); top:-3%; right:-4%; opacity:.4; animation:floatB 9s ease-in-out infinite; --rot:-6deg; }
+.s2-chain   { width:clamp(80px,15vw,180px); top:3%; right:4%; opacity:.6; animation:floatB 9s ease-in-out infinite; --rot:-6deg; }
 
 /* ── SEC 3 ── */
 .s3-tulip-l  { width:clamp(120px,18vw,240px); top:-16px; left:-40px; opacity:.85; animation:floatA 7s ease-in-out infinite 1s; --rot:15deg; }
 .s3-tulip-r  { width:clamp(160px,24vw,320px); bottom:-28px; right:-72px; opacity:.88; animation:floatA 8s ease-in-out infinite 2.5s; --rot:-9deg; }
-.s3-chain    { width:clamp(70px,12vw,160px); bottom:-3%; left:-4%; opacity:.4; animation:floatB 7s ease-in-out infinite 1s; --rot:5deg; }
+.s3-chain    { width:clamp(70px,12vw,160px); bottom:3%; left:4%; opacity:.6; animation:floatB 7s ease-in-out infinite 1s; --rot:5deg; }
 .s3-disc-deco { width:clamp(100px,16vw,200px); top:-4%; right:-3%; opacity:.55; animation:floatA 6s ease-in-out infinite 0.5s; --rot:-21deg; }
 
 /* ── SEC 4 ── */
 .s4-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-60px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:6deg; }
 .s4-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 1.5s; --rot:-13deg; }
-.s4-chain   { width:clamp(70px,12vw,160px); top:-3%; left:-3%; opacity:.4; animation:floatB 6s ease-in-out infinite 2s; --rot:8deg; }
+.s4-chain   { width:clamp(70px,12vw,160px); top:3%; left:3%; opacity:.6; animation:floatB 6s ease-in-out infinite 2s; --rot:8deg; }
 
 /* ── SEC 5 ── */
 .s5-tulip-l { width:clamp(120px,18vw,240px); top:-16px; left:-50px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:17deg; }
 .s5-tulip-r { width:clamp(160px,24vw,320px); bottom:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-10deg; }
-.s5-chain   { width:clamp(80px,14vw,180px); bottom:-4%; left:-5%; opacity:.4; animation:floatB 8s ease-in-out infinite 1s; --rot:-5deg; }
+.s5-chain   { width:clamp(80px,14vw,180px); bottom:4%; left:5%; opacity:.6; animation:floatB 8s ease-in-out infinite 1s; --rot:-5deg; }
 
 /* ── SEC 6 ── */
 .s6-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:9deg; }
 .s6-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-7deg; }
-.s6-chain   { width:clamp(70px,12vw,160px); top:-3%; right:-4%; opacity:.4; animation:floatB 5.5s ease-in-out infinite 1s; --rot:9deg; }
+.s6-chain   { width:clamp(70px,12vw,160px); top:3%; right:4%; opacity:.6; animation:floatB 5.5s ease-in-out infinite 1s; --rot:9deg; }
 
 /* ── SEC 7 ── */
 .s7-tulip-l { width:clamp(120px,18vw,240px); top:-16px; left:-45px; opacity:.85; animation:floatA 8s ease-in-out infinite 1s; --rot:14deg; }
 .s7-tulip-r { width:clamp(160px,24vw,320px); bottom:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2.5s; --rot:-9deg; }
-.s7-chain   { width:clamp(70px,12vw,160px); top:6%; right:10%; opacity:.4; animation:floatB 7s ease-in-out infinite; --rot:-7deg; }
+.s7-chain   { width:clamp(70px,12vw,160px); top:6%; right:10%; opacity:.6; animation:floatB 7s ease-in-out infinite; --rot:-7deg; }
 
 /* ── SEC 8 ── */
 .s8-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:9deg; }
 .s8-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-8deg; }
-.s8-chain   { width:clamp(70px,12vw,160px); bottom:10%; left:10%; opacity:.4; animation:floatB 6s ease-in-out infinite 1.5s; --rot:6deg; }
+.s8-chain   { width:clamp(70px,12vw,160px); bottom:10%; left:10%; opacity:.6; animation:floatB 6s ease-in-out infinite 1.5s; --rot:6deg; }
 
 /* ═══════════════════════════════════════
    FADE IN ON SCROLL
@@ -657,6 +657,35 @@ html, body {
   }
 }
 
+/* ── IPAD LANDSCAPE: touch tablets held sideways (iPad Mini/Air/Pro
+   landscape run roughly 1024–1366px wide) are wider than the ≤1024px
+   tablet breakpoint above, so without this they were falling through
+   to full desktop sizing — decor came out oversized for the shorter
+   landscape viewport height. Detected via pointer/hover instead of a
+   plain width query so real laptops in that width range are unaffected.
+   Portrait iPads are already covered by the ≤1024px query above. ── */
+@media (orientation:landscape) and (hover:none) and (pointer:coarse) and (max-width:1366px) {
+  .sec-inner { max-width: 660px; padding: 3.2rem 2.4rem; }
+
+  .pf-mat { aspect-ratio: 5/4; }
+
+  .vinyl-section { gap: 2rem; }
+  .vinyl-wrap { width:clamp(170px,24vw,220px); height:clamp(170px,24vw,220px); }
+
+  .video-frame-wrap { max-width: 560px; }
+
+  .s3-disc-deco { width:clamp(80px,10vw,130px); }
+
+  .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
+  .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
+    width:clamp(120px,14vw,180px);
+  }
+  .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
+  .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
+    width:clamp(135px,16vw,200px);
+  }
+}
+
 /* ── LARGE PHONE / SMALL TABLET (≤768px): photo grid and love
    rows keep the same two-column layout as laptop, just scaled
    down; decor grows further and re-crops. ── */
@@ -671,19 +700,19 @@ html, body {
 
   .video-frame-wrap { max-width: 92vw; }
 
-  .s3-disc-deco { width:clamp(70px,11vw,120px); opacity:.45; }
+  .s3-disc-deco { width:clamp(80px,12.5vw,138px); opacity:.45; }
 
   .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
   .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
-    width:clamp(120px,26vw,190px);
+    width:clamp(138px,28vw,215px);
   }
   .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
   .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
-    width:clamp(135px,28vw,210px);
+    width:clamp(155px,30vw,238px);
   }
-  .sh-heart-1, .sh-heart-2 { width:clamp(60px,13vw,105px); }
-  .sh-chain-1 { width:clamp(100px,22vw,175px); }
-  .sh-ribbon  { width:clamp(70px,14vw,120px); }
+  .sh-heart-1, .sh-heart-2 { width:clamp(65px,14vw,115px); }
+  .sh-chain-1 { width:clamp(115px,24vw,200px); }
+  .sh-ribbon  { width:clamp(80px,15vw,138px); }
 
   .letter-inner { padding: 2rem 1.6rem; }
   .story-inner  { padding: 2.2rem 1.6rem 2.2rem 2.2rem; }
@@ -699,19 +728,19 @@ html, body {
   .photo-frame-wrap, .love-img-wrap { padding: 5px; }
   .pf-c, .sf-c { width: 20px; height: 20px; }
 
-  .s3-disc-deco { width:clamp(56px,18vw,90px); opacity:.35; }
+  .s3-disc-deco { width:clamp(65px,20vw,104px); opacity:.35; }
 
-  .sh-chain-1 { width:clamp(85px,20vw,140px); opacity:.35; }
-  .sh-heart-1, .sh-heart-2 { width:clamp(50px,11vw,85px); }
-  .sh-ribbon  { width:clamp(60px,12vw,100px); }
+  .sh-chain-1 { width:clamp(98px,22vw,161px); opacity:.55; }
+  .sh-heart-1, .sh-heart-2 { width:clamp(57px,12.5vw,98px); }
+  .sh-ribbon  { width:clamp(69px,14vw,115px); }
 
   .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
   .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
-    width:clamp(105px,24vw,165px);
+    width:clamp(121px,26vw,190px);
   }
   .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
   .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
-    width:clamp(115px,26vw,180px);
+    width:clamp(132px,28vw,207px);
   }
 
   .letter-salutation { font-size: 1.5rem; }
