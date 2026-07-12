@@ -237,13 +237,19 @@
       <div class="envelope-scene" id="envelopeScene">
         <div class="envelope" id="envelope" onclick="openEnvelope()">
           <div class="env-body">
-            <div class="env-flap" id="envFlap"></div>
+            <span class="sf-c sf-c-tl"></span><span class="sf-c sf-c-tr"></span>
+            <span class="sf-c sf-c-bl"></span><span class="sf-c sf-c-br"></span>
             <div class="env-fold env-fold-l"></div>
             <div class="env-fold env-fold-r"></div>
             <div class="env-fold env-fold-b"></div>
+            <div class="env-flap" id="envFlap"></div>
             <div class="env-seal"><span>💌</span></div>
           </div>
-          <p class="env-hint">tap to open</p>
+          <p class="env-hint">
+            <span class="env-hint-line"></span>
+            tap to open
+            <span class="env-hint-line"></span>
+          </p>
         </div>
         <div class="letter" id="letter">
           <div class="letter-frame">

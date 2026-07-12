@@ -76,11 +76,11 @@ function initVinyl() {
     const unmute = () => {
       audio.muted = false;
       if (audio.paused) audio.play().catch(()=>{});
-      ['pointerdown', 'touchend', 'keydown', 'scroll', 'wheel'].forEach(evt =>
+      ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'].forEach(evt =>
         document.removeEventListener(evt, unmute)
       );
     };
-    ['pointerdown', 'touchend', 'keydown', 'scroll', 'wheel'].forEach(evt =>
+    ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'].forEach(evt =>
       document.addEventListener(evt, unmute, { passive: true })
     );
   }

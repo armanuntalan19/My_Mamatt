@@ -498,83 +498,116 @@ html, body {
 
 .envelope {
   cursor:pointer; user-select:none;
-  transition:transform 0.3s ease;
+  transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1), filter 0.35s ease;
+  filter: drop-shadow(0 10px 26px rgba(194,59,106,0.16));
 }
-.envelope:hover { transform:scale(1.02); }
+.envelope:hover {
+  transform:scale(1.025) rotate(-0.6deg) translateY(-3px);
+  filter: drop-shadow(0 16px 34px rgba(194,59,106,0.24));
+}
+.envelope.opened:hover { transform:none; }
 
 .env-body {
   position:relative; width:100%;
   padding-bottom:62%;
-  background:#fff0f5; border-radius:4px;
-  box-shadow: 0 0 0 1.5px var(--gold-lt), 0 0 0 3px #fff, 0 0 0 5px rgba(201,146,46,0.28), 0 16px 48px -10px rgba(194,59,106,0.25);
+  background:linear-gradient(160deg,#fff6f9,#fce8f0);
+  border-radius:6px;
+  box-shadow:
+    0 0 0 1.5px var(--gold-lt),
+    0 0 0 3.5px #fff,
+    0 0 0 5.5px rgba(201,146,46,0.22),
+    0 20px 50px -14px rgba(194,59,106,0.3);
   overflow:hidden;
+}
+/* Envelope back — the folds sit here, drawn with clip-path so
+   they scale proportionally with the envelope at any width. */
+.env-fold {
+  position:absolute; inset:0;
+  background:linear-gradient(160deg,#f7c9dc,#f2b3cc);
+}
+.env-fold-l { clip-path: polygon(0 100%, 0 34%, 52% 100%); }
+.env-fold-r {
+  clip-path: polygon(100% 100%, 100% 34%, 48% 100%);
+  background:linear-gradient(200deg,#f9d0df,#f4bdd2);
+}
+.env-fold-b {
+  clip-path: polygon(0 100%, 100% 100%, 100% 42%, 50% 78%, 0 42%);
+  background:linear-gradient(180deg,#fbdae8,#f6c4d9);
 }
 /* Envelope flap (triangle top) */
 .env-flap {
-  position:absolute; top:0; left:0; right:0; height:55%;
-  background:linear-gradient(160deg,#fce8ef,#f7ccd8);
-  clip-path:polygon(0 0, 100% 0, 50% 70%);
+  position:absolute; top:0; left:0; right:0; height:56%;
+  background:linear-gradient(160deg,#fdeef4,#f8ccdd);
+  clip-path:polygon(0 0, 100% 0, 50% 74%);
   transform-origin:top center;
-  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: inset 0 -1px 0 rgba(194,59,106,0.08);
   z-index:2;
 }
 .envelope.opened .env-flap { transform:rotateX(180deg); }
 
-.env-fold {
-  position:absolute; bottom:0;
-  background:linear-gradient(160deg,#f9d0df,#f5bace);
-}
-.env-fold-l {
-  left:0; width:0; height:0;
-  border-style:solid;
-  border-width:0 0 180px 200px;
-  border-color:transparent transparent #f8d5e4 transparent;
-  background:none;
-}
-.env-fold-r {
-  right:0; width:0; height:0;
-  border-style:solid;
-  border-width:0 200px 180px 0;
-  border-color:transparent #f8d5e4 transparent transparent;
-  background:none;
-}
-.env-fold-b {
-  bottom:0; left:0; right:0; height:45%;
-  background:linear-gradient(180deg,#fbdae8,#f8ccd9);
-}
 .env-seal {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:52px; height:52px; border-radius:50%;
-  background:linear-gradient(135deg,var(--rose-deep),var(--rose));
+  width:54px; height:54px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--rose), var(--rose-deep) 70%);
   display:flex; align-items:center; justify-content:center;
   font-size:1.5rem; z-index:3;
-  box-shadow:0 4px 16px rgba(194,59,106,0.35);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.55),
+    0 0 0 4.5px rgba(201,146,46,0.35),
+    0 6px 18px rgba(194,59,106,0.4);
   transition:transform 0.3s ease, opacity 0.3s ease;
+  animation: sealPulse 2.6s ease-in-out infinite;
 }
 .envelope.opened .env-seal { transform:translate(-50%,-50%) scale(0); opacity:0; }
-.env-hint {
-  font-family:'Great Vibes',cursive; font-size:1.3rem;
-  color:var(--rose-deep); margin-top:1rem; opacity:0.7;
+@keyframes sealPulse {
+  0%, 100% { transform:translate(-50%,-50%) scale(1); }
+  50%      { transform:translate(-50%,-50%) scale(1.06); }
 }
+.envelope.opened .env-seal { animation:none; }
 
-/* Letter (hidden, slides up on open) */
+.env-hint {
+  display:flex; align-items:center; justify-content:center; gap:0.7rem;
+  font-family:'Jost',sans-serif; font-weight:300;
+  font-size:0.8rem; letter-spacing:3px; text-transform:uppercase;
+  color:var(--rose-deep); margin-top:1.1rem; opacity:0.65;
+  transition:opacity 0.3s ease;
+}
+.envelope.opened .env-hint { opacity:0; }
+.env-hint-line {
+  width:26px; height:1px;
+  background:linear-gradient(90deg, transparent, var(--rose-pale));
+}
+.env-hint-line:last-child { background:linear-gradient(90deg, var(--rose-pale), transparent); }
+
+/* Letter (collapsed to zero height until opened — no reserved
+   empty space beneath the envelope while it's still closed) */
 .letter {
   max-width:480px; margin:0 auto;
-  transform:translateY(30px) scale(0.96);
-  opacity:0; pointer-events:none;
-  transition:transform 0.7s cubic-bezier(0.34,1.2,0.64,1), opacity 0.5s ease;
+  display:grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s cubic-bezier(0.34,1.15,0.64,1), margin-top 0.6s ease;
+  pointer-events:none;
 }
-.letter.revealed { transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+.letter.revealed {
+  grid-template-rows: 1fr;
+  margin-top: 2.2rem;
+  pointer-events:auto;
+}
 
 .letter-frame {
   position:relative; padding:10px;
   background:#fff; border-radius:4px;
+  min-height:0; overflow:hidden;
+  opacity:0; transform:translateY(24px) scale(0.96);
+  transition: opacity 0.5s ease 0.12s, transform 0.6s cubic-bezier(0.34,1.2,0.64,1) 0.12s;
   box-shadow:
     0 0 0 1.5px var(--gold-lt),
     0 0 0 3px #fff,
     0 0 0 5px rgba(201,146,46,0.28),
     0 14px 42px -10px rgba(194,59,106,0.22);
 }
+.letter.revealed .letter-frame { opacity:1; transform:translateY(0) scale(1); }
 .letter-inner {
   background:linear-gradient(160deg,#fff9fb,var(--cream));
   padding:2.5rem 2.2rem; border-radius:2px; text-align:left;
@@ -612,15 +645,15 @@ html, body {
 
   .video-frame-wrap { max-width: 620px; }
 
-  .s3-disc-deco { top:auto; bottom:-3%; right:-3%; width:clamp(110px,15vw,170px); }
+  .s3-disc-deco { width:clamp(90px,13vw,150px); }
 
   .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
   .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
-    width:clamp(170px,24vw,260px);
+    width:clamp(150px,20vw,230px);
   }
   .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
   .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
-    width:clamp(190px,26vw,290px);
+    width:clamp(165px,22vw,255px);
   }
 }
 
@@ -638,19 +671,19 @@ html, body {
 
   .video-frame-wrap { max-width: 92vw; }
 
-  .s3-disc-deco { bottom:-2%; right:-2%; width:clamp(100px,26vw,160px); opacity:.4; }
+  .s3-disc-deco { width:clamp(70px,11vw,120px); opacity:.45; }
 
   .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
   .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
-    width:clamp(190px,40vw,290px);
+    width:clamp(120px,26vw,190px);
   }
   .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
   .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
-    width:clamp(210px,44vw,330px);
+    width:clamp(135px,28vw,210px);
   }
-  .sh-heart-1, .sh-heart-2 { width:clamp(95px,20vw,155px); }
-  .sh-chain-1 { width:clamp(160px,34vw,270px); }
-  .sh-ribbon  { width:clamp(115px,22vw,190px); }
+  .sh-heart-1, .sh-heart-2 { width:clamp(60px,13vw,105px); }
+  .sh-chain-1 { width:clamp(100px,22vw,175px); }
+  .sh-ribbon  { width:clamp(70px,14vw,120px); }
 
   .letter-inner { padding: 2rem 1.6rem; }
   .story-inner  { padding: 2.2rem 1.6rem 2.2rem 2.2rem; }
@@ -666,9 +699,20 @@ html, body {
   .photo-frame-wrap, .love-img-wrap { padding: 5px; }
   .pf-c, .sf-c { width: 20px; height: 20px; }
 
-  .s3-disc-deco { width:clamp(90px,24vw,140px); bottom:1%; right:1%; opacity:.35; }
+  .s3-disc-deco { width:clamp(56px,18vw,90px); opacity:.35; }
 
-  .sh-chain-1 { width:clamp(140px,36vw,230px); opacity:.35; }
+  .sh-chain-1 { width:clamp(85px,20vw,140px); opacity:.35; }
+  .sh-heart-1, .sh-heart-2 { width:clamp(50px,11vw,85px); }
+  .sh-ribbon  { width:clamp(60px,12vw,100px); }
+
+  .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
+  .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
+    width:clamp(105px,24vw,165px);
+  }
+  .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
+  .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
+    width:clamp(115px,26vw,180px);
+  }
 
   .letter-salutation { font-size: 1.5rem; }
   .env-seal { width:44px; height:44px; font-size:1.2rem; }

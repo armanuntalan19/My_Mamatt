@@ -233,35 +233,36 @@ html, body {
   50%       { transform: translateX(-5px); }
 }
 
-/* ── RESPONSIVE — three tiers, each tuned separately ── */
+/* ── RESPONSIVE — three tiers; decorations shrink on
+   smaller screens instead of growing. ── */
 
 /* TABLET (≤1024px) */
 @media (max-width: 1024px) {
-  .deco-chain-1 { width: clamp(150px, 26vw, 240px); left: 26%; }
-  .deco-chain-2 { width: clamp(100px, 18vw, 190px); }
-  .deco-tulip-cover-l { width: clamp(190px, 32vw, 310px); left: -45px; }
-  .deco-tulip-cover-r { width: clamp(210px, 34vw, 350px); right: -65px; }
-  .deco-heart-1 { width: clamp(90px, 15vw, 145px); }
-  .deco-ribbon-1, .deco-ribbon-2 { width: clamp(100px, 15vw, 160px); }
+  .deco-chain-1 { width: clamp(110px, 20vw, 190px); left: 26%; }
+  .deco-chain-2 { width: clamp(75px, 13vw, 145px); }
+  .deco-tulip-cover-l { width: clamp(150px, 24vw, 250px); left: -40px; }
+  .deco-tulip-cover-r { width: clamp(165px, 26vw, 280px); right: -55px; }
+  .deco-heart-1 { width: clamp(65px, 11vw, 110px); }
+  .deco-ribbon-1 { width: clamp(70px, 11vw, 120px); }
 }
 
-/* LARGE PHONE / SMALL TABLET (≤768px) — decor grows further and
-   re-crops at the edges so it reads as part of the layout, not
-   a shrunken desktop copy. */
+/* LARGE PHONE / SMALL TABLET (≤768px) — decorations shrink
+   further so they read as accents, not competing shapes. */
 @media (max-width: 768px) {
   .cover-inner { padding: 1.6rem; gap: 0.5rem; }
-  .deco-chain-1 { width: clamp(150px, 40vw, 230px); top: -14px; }
-  .deco-tulip-cover-l { width: clamp(190px, 42vw, 310px); left: -55px; bottom: -35px; }
-  .deco-tulip-cover-r { width: clamp(210px, 46vw, 350px); right: -75px; bottom: -45px; }
-  .deco-heart-1, .deco-heart-3 { width: clamp(95px, 18vw, 155px); }
-  .deco-ribbon-1, .deco-ribbon-2 { width: clamp(105px, 18vw, 175px); }
+  .deco-chain-1 { width: clamp(90px, 24vw, 150px); top: -12px; }
+  .deco-tulip-cover-l { width: clamp(130px, 30vw, 200px); left: -35px; bottom: -25px; }
+  .deco-tulip-cover-r { width: clamp(145px, 32vw, 220px); right: -50px; bottom: -32px; }
+  .deco-heart-1 { width: clamp(55px, 12vw, 95px); }
+  .deco-ribbon-1 { width: clamp(58px, 12vw, 100px); }
 }
 
-/* PHONE (≤480px) — spacing tightens, images stay large and
-   intentionally crop off-screen rather than shrinking further. */
+/* PHONE (≤480px) — decorations stay small and clearly
+   secondary to the text content. */
 @media (max-width: 480px) {
-  .deco-heart-3 { width: 60px; opacity: .3; }
-  .deco-chain-2 { width: clamp(110px, 30vw, 165px); opacity: .22; }
-  .deco-tulip-cover-l { width: clamp(180px, 46vw, 240px); left: -60px; }
-  .deco-tulip-cover-r { width: clamp(200px, 50vw, 260px); right: -80px; }
+  .deco-chain-2 { width: clamp(60px, 18vw, 105px); opacity: .22; }
+  .deco-tulip-cover-l { width: clamp(115px, 32vw, 165px); left: -40px; }
+  .deco-tulip-cover-r { width: clamp(130px, 34vw, 180px); right: -55px; }
+  .deco-heart-1 { width: clamp(48px, 13vw, 78px); }
+  .deco-ribbon-1 { width: clamp(50px, 13vw, 82px); }
 }
