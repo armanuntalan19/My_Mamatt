@@ -110,9 +110,9 @@ html, body {
 .float-deco { animation: floatA 5s ease-in-out infinite; }
 
 /* ── SEC 1 hero decor ── */
-.sh-heart-1 { width:clamp(70px,12vw,140px); top:6%; left:4%; opacity:.4; animation:floatA 6s ease-in-out infinite; --rot:-15deg; }
-.sh-heart-2 { width:clamp(50px,9vw,100px);  top:8%; right:6%; opacity:.35; animation:floatA 5s ease-in-out infinite 1.5s; --rot:12deg; }
-.sh-chain-1 { width:clamp(100px,20vw,240px); top:-10px; left:28%; opacity:.3; animation:floatB 7s ease-in-out infinite; }
+.sh-heart-1 { width:clamp(70px,12vw,140px); top:6%; left:4%; opacity:.6; animation:floatA 6s ease-in-out infinite; --rot:-15deg; }
+.sh-heart-2 { width:clamp(50px,9vw,100px);  top:8%; right:6%; opacity:.55; animation:floatA 5s ease-in-out infinite 1.5s; --rot:12deg; }
+.sh-chain-1 { width:clamp(100px,20vw,240px); top:-10px; left:28%; opacity:.45; animation:floatB 7s ease-in-out infinite; }
 .sh-ribbon  { width:clamp(80px,12vw,150px); bottom:6%; right:4%; opacity:.8; animation:floatA 5.5s ease-in-out infinite 0.8s; --rot:10deg; }
 .sec-tulip-l { width:clamp(160px,26vw,320px); bottom:-20px; left:-50px; opacity:.9; animation:floatA 8s ease-in-out infinite 1s; --rot:8deg; }
 .sec-tulip-r { width:clamp(180px,28vw,360px); bottom:-30px; right:-70px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-5deg; }
@@ -120,38 +120,38 @@ html, body {
 /* ── SEC 2 ── */
 .s2-tulip-l { width:clamp(130px,20vw,260px); bottom:-10px; left:-40px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:10deg; }
 .s2-tulip-r { width:clamp(150px,22vw,300px); top:-20px; right:-60px; opacity:.82; animation:floatA 7s ease-in-out infinite 2s; --rot:-8deg; }
-.s2-chain   { width:clamp(80px,15vw,180px); top:5%; right:18%; opacity:.28; animation:floatB 9s ease-in-out infinite; }
+.s2-chain   { width:clamp(80px,15vw,180px); top:5%; right:18%; opacity:.4; animation:floatB 9s ease-in-out infinite; }
 
 /* ── SEC 3 ── */
 .s3-tulip-l  { width:clamp(120px,18vw,240px); top:-10px; left:-30px; opacity:.85; animation:floatA 7s ease-in-out infinite 1s; --rot:12deg; }
 .s3-tulip-r  { width:clamp(160px,24vw,320px); bottom:-20px; right:-60px; opacity:.88; animation:floatA 8s ease-in-out infinite 2.5s; --rot:-6deg; }
-.s3-chain    { width:clamp(70px,12vw,160px); bottom:8%; left:15%; opacity:.25; animation:floatB 7s ease-in-out infinite 1s; }
+.s3-chain    { width:clamp(70px,12vw,160px); bottom:8%; left:15%; opacity:.4; animation:floatB 7s ease-in-out infinite 1s; }
 .s3-disc-deco { width:clamp(100px,16vw,200px); top:10%; right:5%; opacity:.55; animation:floatA 6s ease-in-out infinite 0.5s; --rot:-15deg; }
 
 /* ── SEC 4 ── */
 .s4-tulip-l { width:clamp(130px,20vw,260px); bottom:-10px; left:-50px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:5deg; }
 .s4-tulip-r { width:clamp(160px,24vw,320px); top:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 1.5s; --rot:-10deg; }
-.s4-chain   { width:clamp(70px,12vw,160px); top:8%; left:10%; opacity:.28; animation:floatB 6s ease-in-out infinite 2s; }
+.s4-chain   { width:clamp(70px,12vw,160px); top:8%; left:10%; opacity:.4; animation:floatB 6s ease-in-out infinite 2s; }
 
 /* ── SEC 5 ── */
 .s5-tulip-l { width:clamp(120px,18vw,240px); top:-10px; left:-40px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:15deg; }
 .s5-tulip-r { width:clamp(160px,24vw,320px); bottom:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-8deg; }
-.s5-chain   { width:clamp(80px,14vw,180px); bottom:5%; left:20%; opacity:.25; animation:floatB 8s ease-in-out infinite 1s; }
+.s5-chain   { width:clamp(80px,14vw,180px); bottom:5%; left:20%; opacity:.4; animation:floatB 8s ease-in-out infinite 1s; }
 
 /* ── SEC 6 ── */
 .s6-tulip-l { width:clamp(130px,20vw,260px); bottom:-10px; left:-45px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:8deg; }
 .s6-tulip-r { width:clamp(160px,24vw,320px); top:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-6deg; }
-.s6-chain   { width:clamp(70px,12vw,160px); top:6%; right:18%; opacity:.28; animation:floatB 5.5s ease-in-out infinite 1s; }
+.s6-chain   { width:clamp(70px,12vw,160px); top:6%; right:18%; opacity:.4; animation:floatB 5.5s ease-in-out infinite 1s; }
 
 /* ── SEC 7 ── */
 .s7-tulip-l { width:clamp(120px,18vw,240px); top:-10px; left:-35px; opacity:.85; animation:floatA 8s ease-in-out infinite 1s; --rot:12deg; }
 .s7-tulip-r { width:clamp(160px,24vw,320px); bottom:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 2.5s; --rot:-8deg; }
-.s7-chain   { width:clamp(70px,12vw,160px); top:8%; right:10%; opacity:.28; animation:floatB 7s ease-in-out infinite; }
+.s7-chain   { width:clamp(70px,12vw,160px); top:8%; right:10%; opacity:.4; animation:floatB 7s ease-in-out infinite; }
 
 /* ── SEC 8 ── */
 .s8-tulip-l { width:clamp(130px,20vw,260px); bottom:-10px; left:-45px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:8deg; }
 .s8-tulip-r { width:clamp(160px,24vw,320px); top:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-6deg; }
-.s8-chain   { width:clamp(70px,12vw,160px); bottom:10%; left:10%; opacity:.28; animation:floatB 6s ease-in-out infinite 1.5s; }
+.s8-chain   { width:clamp(70px,12vw,160px); bottom:10%; left:10%; opacity:.4; animation:floatB 6s ease-in-out infinite 1.5s; }
 
 /* ═══════════════════════════════════════
    FADE IN ON SCROLL
@@ -558,31 +558,86 @@ html, body {
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — three tiers, each tuned on its
+   own terms rather than a scaled-down desktop.
    ═══════════════════════════════════════ */
-@media (max-width:768px) {
-  .vinyl-section { gap:2rem; }
-  .vinyl-wrap { width:clamp(160px,55vw,220px); height:clamp(160px,55vw,220px); }
-  .love-row { grid-template-columns:1fr; gap:1.5rem; }
-  .love-row-img-right .love-text { order:0; }
-  .love-img-wrap .pf-mat { aspect-ratio:4/3; }
 
-  .s3-disc-deco { width:clamp(120px,28vw,190px); top:5%; right:2%; }
+/* ── TABLET (≤1024px): content images grow, tulips get a
+   touch bigger and reposition slightly so nothing on a
+   narrower canvas drifts into the text column. ── */
+@media (max-width:1024px) {
+  .sec-inner { max-width: 680px; padding: 4rem 2.4rem; }
+
+  .photo-grid { gap: 2rem; }
+  .pf-mat { aspect-ratio: 5/4; }
+
+  .vinyl-section { gap: 2.4rem; }
+  .vinyl-wrap { width:clamp(210px,30vw,250px); height:clamp(210px,30vw,250px); }
+
+  .video-frame-wrap { max-width: 620px; }
+
+  .love-row { gap: 2rem; }
+
+  .s3-disc-deco { top:auto; bottom:4%; right:3%; width:clamp(110px,15vw,170px); }
+
   .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
   .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
-    width:clamp(180px,38vw,280px);
+    width:clamp(170px,24vw,260px);
   }
   .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
   .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
-    width:clamp(200px,42vw,320px);
+    width:clamp(190px,26vw,290px);
   }
-  .sh-heart-1, .sh-heart-2 { width:clamp(90px,18vw,150px); }
-  .sh-chain-1 { width:clamp(150px,32vw,260px); }
-  .sh-ribbon  { width:clamp(110px,20vw,180px); }
 }
 
+/* ── LARGE PHONE / SMALL TABLET (≤768px): images become the
+   focal point — single-column photos and love rows so each
+   image is shown large, decor grows further and re-crops. ── */
+@media (max-width:768px) {
+  .sec-inner { padding: 3.8rem 1.6rem; }
+
+  .photo-grid { grid-template-columns: 1fr; gap: 2.2rem; max-width: 420px; margin: 0 auto; }
+  .pf-mat { aspect-ratio: 4/3; }
+
+  .vinyl-section { gap: 2rem; }
+  .vinyl-wrap { width:clamp(190px,52vw,240px); height:clamp(190px,52vw,240px); }
+
+  .video-frame-wrap { max-width: 92vw; }
+
+  .love-row { grid-template-columns:1fr; gap:1.6rem; }
+  .love-row-img-right .love-text { order:0; }
+  .love-img-wrap { max-width: 380px; margin: 0 auto; }
+  .love-img-wrap .pf-mat { aspect-ratio:4/3; }
+
+  .s3-disc-deco { bottom:2%; right:2%; width:clamp(100px,26vw,160px); opacity:.4; }
+
+  .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
+  .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
+    width:clamp(190px,40vw,290px);
+  }
+  .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
+  .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
+    width:clamp(210px,44vw,330px);
+  }
+  .sh-heart-1, .sh-heart-2 { width:clamp(95px,20vw,155px); }
+  .sh-chain-1 { width:clamp(160px,34vw,270px); }
+  .sh-ribbon  { width:clamp(115px,22vw,190px); }
+
+  .letter-inner { padding: 2rem 1.6rem; }
+  .story-inner  { padding: 2.2rem 1.6rem 2.2rem 2.2rem; }
+}
+
+/* ── PHONE (≤480px): images stay large and full-bleed to the
+   card edges — spacing tightens, image sizes don't. ── */
 @media (max-width:480px) {
-  .photo-grid { grid-template-columns:1fr; gap:2rem; }
-  .sec-inner { padding:3.5rem 1.4rem; }
-  .sh-chain-1 { width:clamp(130px,34vw,220px); opacity:.22; }
+  .sec-inner { padding: 3.4rem 1.3rem; }
+  .photo-grid { max-width: 100%; }
+  .love-img-wrap { max-width: 100%; }
+
+  .s3-disc-deco { width:clamp(90px,24vw,140px); bottom:1%; right:1%; opacity:.35; }
+
+  .sh-chain-1 { width:clamp(140px,36vw,230px); opacity:.35; }
+
+  .letter-salutation { font-size: 1.5rem; }
+  .env-seal { width:44px; height:44px; font-size:1.2rem; }
 }

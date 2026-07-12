@@ -4,13 +4,10 @@ function goToPage2() {
 }
 document.addEventListener('DOMContentLoaded', () => {
   const stage = document.getElementById('coverStage');
-  const btn   = document.getElementById('swipeBtn');
   let startX = 0;
   stage.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
   stage.addEventListener('touchend',   e => { if (startX - e.changedTouches[0].clientX > 55) goToPage2(); });
   let mx = 0;
   stage.addEventListener('mousedown', e => { mx = e.clientX; });
   stage.addEventListener('mouseup',   e => { if (mx - e.clientX > 55) goToPage2(); });
-  btn.addEventListener('click', goToPage2);
-  btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') goToPage2(); });
 });

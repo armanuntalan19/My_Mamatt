@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 190" fill="none">
   <defs>
     <radialGradient id="laceFade" cx="50%" cy="45%" r="65%">
-      <stop offset="0%" stop-color="#fffaf3" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#fffaf3" stop-opacity="0.55"/>
+      <stop offset="0%" stop-color="#fffdf8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#fffdf8" stop-opacity="0.5"/>
     </radialGradient>
   </defs>
   <path d="M100 178 C40 138 8 100 8 62 C8 30 32 8 62 8 C80 8 94 18 100 34 C106 18 120 8 138 8 C168 8 192 30 192 62 C192 100 160 138 100 178 Z"
-        fill="url(#laceFade)" stroke="#fffaf3" stroke-width="2"/>
+        fill="url(#laceFade)" stroke="#c9922e" stroke-width="2.5"/>
   <path d="M100 178 C40 138 8 100 8 62 C8 30 32 8 62 8 C80 8 94 18 100 34 C106 18 120 8 138 8 C168 8 192 30 192 62 C192 100 160 138 100 178 Z"
-        fill="none" stroke="#fffaf3" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round" opacity="0.9"/>
-  <g stroke="#fffaf3" stroke-width="1.4" opacity="0.75" fill="none">
+        fill="none" stroke="#c9922e" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round" opacity="0.9"/>
+  <g stroke="#c9922e" stroke-width="1.4" opacity="0.75" fill="none">
     <path d="M100 160 C55 128 26 96 26 64"/>
     <path d="M100 160 C145 128 174 96 174 64"/>
     <circle cx="100" cy="52" r="10"/>
     <path d="M100 42 C92 34 78 34 74 44 C71 52 78 58 86 56 C80 62 82 74 92 76 C100 78 106 70 104 62"/>
     <path d="M100 42 C108 34 122 34 126 44 C129 52 122 58 114 56 C120 62 118 74 108 76 C100 78 94 70 96 62"/>
   </g>
-  <g fill="#fffaf3" opacity="0.85">
+  <g fill="#c9922e" opacity="0.85">
     <circle cx="42" cy="70" r="2.6"/>
     <circle cx="30" cy="86" r="2.2"/>
     <circle cx="46" cy="100" r="2"/>
