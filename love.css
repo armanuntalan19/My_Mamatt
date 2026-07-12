@@ -169,11 +169,11 @@ html, body {
   margin-bottom: 0.3rem; opacity: 0.85;
 }
 .sec-title {
-  font-family: 'Cormorant Garamond', serif; font-weight: 600;
-  font-size: clamp(2rem, 5vw, 3.5rem); color: var(--ink);
-  text-align: center; line-height: 1.2; margin-bottom: 0.5rem;
+  font-family: 'Great Vibes', cursive; font-weight: 400;
+  font-size: clamp(2.4rem, 6vw, 4.2rem); color: var(--ink);
+  text-align: center; line-height: 1.25; margin-bottom: 0.6rem;
 }
-.sec-title em { font-style: italic; color: var(--rose-deep); }
+.sec-title em { font-style: normal; color: var(--rose-deep); }
 .accent-dot   { color: var(--rose); }
 
 .title-rule {
@@ -204,9 +204,9 @@ html, body {
   text-transform: uppercase; color: var(--ink); opacity: 0.6;
 }
 .ht-for {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-weight: 600; font-size: clamp(3.5rem, 9vw, 6.5rem);
-  color: var(--rose-deep); line-height: 1;
+  font-family: 'Great Vibes', cursive; font-weight: 400;
+  font-size: clamp(4rem, 10vw, 7.5rem);
+  color: var(--rose-deep); line-height: 1.1;
   animation: floatA 5s ease-in-out infinite 0.5s;
 }
 .hero-divider {
@@ -337,8 +337,8 @@ html, body {
 
 .vinyl-info { text-align:center; }
 .song-name {
-  font-family:'Cormorant Garamond',serif; font-style:italic;
-  font-size:1.8rem; color:var(--ink); margin-bottom:0.2rem;
+  font-family:'Great Vibes',cursive;
+  font-size:2.4rem; color:var(--ink); margin-bottom:0.3rem;
 }
 .song-artist { font-family:'Great Vibes',cursive; font-size:1.3rem; color:var(--rose-deep); margin-bottom:1.4rem; }
 .vinyl-controls { display:flex; align-items:center; gap:0.9rem; max-width:320px; margin:0 auto 0.6rem; }
@@ -427,9 +427,9 @@ html, body {
   text-transform:uppercase; margin-bottom:0.6rem;
 }
 .love-heading {
-  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600;
-  font-size:clamp(1.4rem,3vw,2rem); color:var(--rose-deep);
-  margin-bottom:0.7rem; line-height:1.2;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(1.9rem,3.8vw,2.7rem); color:var(--rose-deep);
+  margin-bottom:0.7rem; line-height:1.25;
 }
 .love-text p {
   font-family:'Jost',sans-serif; font-weight:300;
@@ -555,8 +555,8 @@ html, body {
   margin-bottom:0.9rem;
 }
 .letter-sign {
-  display:block; font-family:'Cormorant Garamond',serif; font-style:italic;
-  font-size:1.3rem; color:var(--rose-deep); margin-top:1.4rem;
+  display:block; font-family:'Great Vibes',cursive;
+  font-size:1.7rem; color:var(--rose-deep); margin-top:1.4rem;
 }
 
 /* ═══════════════════════════════════════
@@ -569,19 +569,22 @@ html, body {
   .love-row-img-right .love-text { order:0; }
   .love-img-wrap .pf-mat { aspect-ratio:4/3; }
 
-  .s3-disc-deco { width:clamp(80px,22vw,140px); top:5%; right:2%; }
+  .s3-disc-deco { width:clamp(120px,28vw,190px); top:5%; right:2%; }
   .sec-tulip-l, .s2-tulip-l, .s3-tulip-l, .s4-tulip-l,
   .s5-tulip-l, .s6-tulip-l, .s7-tulip-l, .s8-tulip-l {
-    width:clamp(120px,32vw,200px);
+    width:clamp(180px,38vw,280px);
   }
   .sec-tulip-r, .s2-tulip-r, .s3-tulip-r, .s4-tulip-r,
   .s5-tulip-r, .s6-tulip-r, .s7-tulip-r, .s8-tulip-r {
-    width:clamp(140px,38vw,230px);
+    width:clamp(200px,42vw,320px);
   }
+  .sh-heart-1, .sh-heart-2 { width:clamp(90px,18vw,150px); }
+  .sh-chain-1 { width:clamp(150px,32vw,260px); }
+  .sh-ribbon  { width:clamp(110px,20vw,180px); }
 }
 
 @media (max-width:480px) {
   .photo-grid { grid-template-columns:1fr; gap:2rem; }
   .sec-inner { padding:3.5rem 1.4rem; }
-  .sh-chain-1 { display:none; }
+  .sh-chain-1 { width:clamp(130px,34vw,220px); opacity:.22; }
 }
