@@ -131,7 +131,7 @@ html, body {
 /* ── SEC 4 ── */
 .s4-tulip-l { width:clamp(130px,20vw,260px); bottom:-10px; left:-50px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:5deg; }
 .s4-tulip-r { width:clamp(160px,24vw,320px); top:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 1.5s; --rot:-10deg; }
-.s4-heart   { width:clamp(50px,9vw,110px); top:8%; left:10%; opacity:.32; animation:floatA 6s ease-in-out infinite 2s; --rot:-20deg; }
+.s4-chain   { width:clamp(70px,12vw,160px); top:8%; left:10%; opacity:.28; animation:floatB 6s ease-in-out infinite 2s; }
 
 /* ── SEC 5 ── */
 .s5-tulip-l { width:clamp(120px,18vw,240px); top:-10px; left:-40px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:15deg; }
@@ -141,7 +141,7 @@ html, body {
 /* ── SEC 6 ── */
 .s6-tulip-l { width:clamp(130px,20vw,260px); bottom:-10px; left:-45px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:8deg; }
 .s6-tulip-r { width:clamp(160px,24vw,320px); top:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-6deg; }
-.s6-heart   { width:clamp(55px,9vw,110px); top:6%; right:18%; opacity:.3; animation:floatA 5.5s ease-in-out infinite 1s; --rot:15deg; }
+.s6-chain   { width:clamp(70px,12vw,160px); top:6%; right:18%; opacity:.28; animation:floatB 5.5s ease-in-out infinite 1s; }
 
 /* ── SEC 7 ── */
 .s7-tulip-l { width:clamp(120px,18vw,240px); top:-10px; left:-35px; opacity:.85; animation:floatA 8s ease-in-out infinite 1s; --rot:12deg; }
@@ -151,7 +151,7 @@ html, body {
 /* ── SEC 8 ── */
 .s8-tulip-l { width:clamp(130px,20vw,260px); bottom:-10px; left:-45px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:8deg; }
 .s8-tulip-r { width:clamp(160px,24vw,320px); top:-20px; right:-60px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-6deg; }
-.s8-heart   { width:clamp(55px,9vw,110px); bottom:10%; left:10%; opacity:.32; animation:floatA 6s ease-in-out infinite 1.5s; --rot:-12deg; }
+.s8-chain   { width:clamp(70px,12vw,160px); bottom:10%; left:10%; opacity:.28; animation:floatB 6s ease-in-out infinite 1.5s; }
 
 /* ═══════════════════════════════════════
    FADE IN ON SCROLL
