@@ -25,6 +25,37 @@ function initVinyl() {
 
   function fmt(s) { const m=Math.floor(s/60); const sec=Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
 
+  /* ── Persisted music state ────────────────────────────────
+     Survives page refreshes and stays in sync across every page/tab
+     that shares this origin — the source of truth lives in
+     localStorage instead of only in memory, so a reload can never
+     "forget" that the visitor paused the song. */
+  const STORAGE_KEY = 'mamattMusicState';
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; } // localStorage unavailable (private mode, etc.) — degrade gracefully
+  }
+
+  function saveState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        state,                    // 'playing' | 'paused'
+        time: audio.currentTime,  // resume near where it left off
+        savedAt: Date.now()
+      }));
+    } catch (e) { /* ignore — playback still works, it just won't persist */ }
+  }
+
+  function restoreTime(t) {
+    if (typeof t !== 'number' || !isFinite(t) || t <= 0) return;
+    const apply = () => { try { audio.currentTime = t; } catch (e) {} };
+    if (audio.readyState >= 1) apply(); // HAVE_METADATA already available
+    else audio.addEventListener('loadedmetadata', apply, { once: true });
+  }
+
   function setPlay(state) {
     if (state) {
       audio.muted = false;
@@ -36,6 +67,7 @@ function initVinyl() {
       disc.classList.remove('playing'); // pauses the spin immediately
       playIcon.textContent = '▶';
     }
+    saveState(state ? 'playing' : 'paused');
   }
 
   playBtn.addEventListener('click', () => setPlay(audio.paused));
@@ -46,15 +78,54 @@ function initVinyl() {
     timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
   });
 
+  // Keep the saved position fresh while playing (throttled) so a refresh
+  // resumes close to where the visitor actually left off.
+  let lastSave = 0;
+  audio.addEventListener('timeupdate', () => {
+    const now = Date.now();
+    if (now - lastSave > 3000) {
+      lastSave = now;
+      saveState(audio.paused ? 'paused' : 'playing');
+    }
+  });
+
+  // Belt-and-suspenders: also snapshot state right before the tab/page
+  // goes away, so a refresh or close never leaves stale/half-written state.
+  const snapshot = () => saveState(audio.paused ? 'paused' : 'playing');
+  window.addEventListener('pagehide', snapshot);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') snapshot();
+  });
+
+  // Keep multiple tabs/pages of the site in sync: if the song is
+  // paused/played in one tab, mirror it here instantly.
+  window.addEventListener('storage', e => {
+    if (e.key !== STORAGE_KEY || !e.newValue) return;
+    let s;
+    try { s = JSON.parse(e.newValue); } catch (err) { return; }
+    if (s.state === 'paused' && !audio.paused) {
+      audio.pause();
+      disc.classList.remove('playing');
+      playIcon.textContent = '▶';
+    } else if (s.state === 'playing' && audio.paused) {
+      audio.muted = false;
+      audio.play().then(() => {
+        disc.classList.add('playing');
+        playIcon.textContent = '⏸';
+      }).catch(()=>{});
+    }
+  });
+
   bar.addEventListener('click', e => {
     if (!audio.duration) return;
     const r = bar.getBoundingClientRect();
     audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
   });
 
-  // Autoplay when the song section scrolls into view.
-  // After that, playback is controlled ONLY by the Pause button —
-  // scrolling away, switching tabs, etc. must never stop it.
+  // Autoplay when the song section scrolls into view (first-ever visit only).
+  // After that, playback is controlled ONLY by the Pause button and the
+  // persisted state above — scrolling away, switching tabs, or refreshing
+  // must never silently override a choice the visitor already made.
   //
   // Browsers reliably allow MUTED autoplay but usually block unmuted
   // autoplay without a user gesture. To avoid the song silently failing
@@ -67,6 +138,7 @@ function initVinyl() {
   function markPlaying() {
     disc.classList.add('playing');
     playIcon.textContent = '⏸';
+    saveState('playing');
   }
 
   function armUnmuteOnGesture() {
@@ -105,17 +177,36 @@ function initVinyl() {
     }
   }
 
-  const songSection = document.getElementById('sec3');
-  if (songSection) {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          attemptAutoplay();
-          obs.unobserve(songSection); // only ever auto-triggers once — from here on, only the button controls playback
-        }
-      });
-    }, { threshold: 0.45 });
-    obs.observe(songSection);
+  const saved = loadState();
+
+  if (saved && saved.state === 'paused') {
+    // The visitor explicitly paused before this refresh — respect that.
+    // Restore the position they were at, but do NOT auto-resume, and
+    // don't even attach the scroll-triggered autoplay watcher: the
+    // visitor already made their choice, so autoplay must stay silent.
+    restoreTime(saved.time);
+    disc.classList.remove('playing');
+    playIcon.textContent = '▶';
+  } else if (saved && saved.state === 'playing') {
+    // It was playing before this refresh — resume right away instead of
+    // waiting for the visitor to scroll back down to the song section.
+    restoreTime(saved.time);
+    attemptAutoplay();
+  } else {
+    // First-ever visit on this device — autoplay the moment the song
+    // section scrolls into view, exactly as before.
+    const songSection = document.getElementById('sec3');
+    if (songSection) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            attemptAutoplay();
+            obs.unobserve(songSection); // only ever auto-triggers once — from here on, only the button/persisted state controls playback
+          }
+        });
+      }, { threshold: 0.45 });
+      obs.observe(songSection);
+    }
   }
 }
 
