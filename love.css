@@ -185,8 +185,8 @@ html, body {
 .s7-chain   { width:clamp(70px,12vw,160px); top:6%; right:10%; opacity:.6; animation:floatB 7s ease-in-out infinite; --rot:-7deg; }
 
 /* ── SEC 8 ── */
-.s8-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:80deg; }
-.s8-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-20deg; }
+.s8-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite 1s; --rot:30deg; }
+.s8-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-80deg; }
 .s8-chain   { width:clamp(70px,12vw,160px); bottom:10%; left:10%; opacity:.6; animation:floatB 6s ease-in-out infinite 1.5s; --rot:6deg; }
 
 /* ═══════════════════════════════════════
