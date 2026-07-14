@@ -54,8 +54,8 @@ html, body {
 }
 .deco-heart-1 {
   width: clamp(90px, 15vw, 170px);
-  top: -3%; left: -3%;
-  transform: rotate(-19deg);
+  top: 4%; left: 4%;
+  transform: rotate(-14deg);
   animation-delay: 0s; animation-duration: 6s;
 }
 .deco-heart-3 {
@@ -72,14 +72,14 @@ html, body {
 }
 .deco-chain-1 {
   width: clamp(120px, 22vw, 280px);
-  top: -30px; left: 27%;
-  transform: rotate(7deg);
+  top: 5%; left: 27%;
+  transform: rotate(6deg);
   animation-delay: 0.5s;
 }
 .deco-chain-2 {
   width: clamp(80px, 15vw, 180px);
-  bottom: 6%; right: -6%;
-  transform: rotate(-16deg) scaleX(-1);
+  bottom: 6%; right: 4%;
+  transform: rotate(-14deg) scaleX(-1);
   animation-delay: 2s; animation-duration: 6s;
 }
 
@@ -89,8 +89,8 @@ html, body {
 }
 .deco-ribbon-1 {
   width: clamp(90px, 13vw, 160px);
-  top: -3%; right: -2%;
-  transform: rotate(15deg);
+  top: 4%; right: 4%;
+  transform: rotate(12deg);
   opacity: 0.8;
   animation-delay: 0.8s;
 }
