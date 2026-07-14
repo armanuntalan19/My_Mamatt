@@ -154,7 +154,7 @@ html, body {
 .sec-tulip-r { width:clamp(180px,28vw,360px); bottom:-36px; right:-85px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-8deg; }
 
 /* ── SEC 2 ── */
-.s2-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-52px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:11deg; }
+.s2-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-52px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:-6deg; }
 .s2-tulip-r { width:clamp(150px,22vw,300px); top:-28px; right:-72px; opacity:.82; animation:floatA 7s ease-in-out infinite 2s; --rot:-11deg; }
 .s2-chain   { width:clamp(80px,15vw,180px); top:3%; right:4%; opacity:.6; animation:floatB 9s ease-in-out infinite; --rot:-6deg; }
 
@@ -165,7 +165,7 @@ html, body {
 .s3-disc-deco { width:clamp(100px,16vw,200px); top:-4%; right:-3%; opacity:.55; animation:floatA 6s ease-in-out infinite 0.5s; --rot:-21deg; }
 
 /* ── SEC 4 ── */
-.s4-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-60px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:15deg; }
+.s4-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-60px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:-9deg; }
 .s4-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 1.5s; --rot:-13deg; }
 .s4-chain   { width:clamp(70px,12vw,160px); top:3%; left:3%; opacity:.6; animation:floatB 6s ease-in-out infinite 2s; --rot:8deg; }
 
@@ -175,7 +175,7 @@ html, body {
 .s5-chain   { width:clamp(80px,14vw,180px); bottom:4%; left:5%; opacity:.6; animation:floatB 8s ease-in-out infinite 1s; --rot:-5deg; }
 
 /* ── SEC 6 ── */
-.s6-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:15deg; }
+.s6-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:-8deg; }
 .s6-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-7deg; }
 .s6-chain   { width:clamp(70px,12vw,160px); top:3%; right:4%; opacity:.6; animation:floatB 5.5s ease-in-out infinite 1s; --rot:9deg; }
 
@@ -185,7 +185,7 @@ html, body {
 .s7-chain   { width:clamp(70px,12vw,160px); top:6%; right:10%; opacity:.6; animation:floatB 7s ease-in-out infinite; --rot:-7deg; }
 
 /* ── SEC 8 ── */
-.s8-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:14deg; }
+.s8-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-55px; opacity:.85; animation:floatA 8s ease-in-out infinite; --rot:-6deg; }
 .s8-tulip-r { width:clamp(160px,24vw,320px); top:-28px; right:-72px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-8deg; }
 .s8-chain   { width:clamp(70px,12vw,160px); bottom:10%; left:10%; opacity:.6; animation:floatB 6s ease-in-out infinite 1.5s; --rot:6deg; }
 
