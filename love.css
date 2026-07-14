@@ -154,7 +154,7 @@ html, body {
 .sec-tulip-r { width:clamp(180px,28vw,360px); bottom:-36px; right:-85px; opacity:.88; animation:floatA 7s ease-in-out infinite 2s; --rot:-8deg; }
 
 /* ── SEC 2 ── */
-.s2-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-52px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:-6deg; }
+.s2-tulip-l { width:clamp(130px,20vw,260px); bottom:-16px; left:-52px; opacity:.85; animation:floatA 8s ease-in-out infinite 0.5s; --rot:-8deg; }
 .s2-tulip-r { width:clamp(150px,22vw,300px); top:-28px; right:-72px; opacity:.82; animation:floatA 7s ease-in-out infinite 2s; --rot:-11deg; }
 .s2-chain   { width:clamp(80px,15vw,180px); top:3%; right:4%; opacity:.6; animation:floatB 9s ease-in-out infinite; --rot:-6deg; }
 
