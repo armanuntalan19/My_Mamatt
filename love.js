@@ -25,6 +25,13 @@ function initVinyl() {
 
   function fmt(s) { const m=Math.floor(s/60); const sec=Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
 
+  // Keeps the ▶/⏸ glyph visually centered inside the round button —
+  // the play triangle needs a tiny optical nudge that pause doesn't.
+  function setIcon(isPlaying) {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playIcon.classList.toggle('icon-play', !isPlaying);
+  }
+
   /* ── Persisted music state ────────────────────────────────
      Survives page refreshes and stays in sync across every page/tab
      that shares this origin — the source of truth lives in
@@ -56,16 +63,23 @@ function initVinyl() {
     else audio.addEventListener('loadedmetadata', apply, { once: true });
   }
 
+  // True only when the visitor themselves hit the pause button — this is
+  // the ONLY thing that's allowed to keep the song silent. Scrolling away
+  // from the section, switching tabs, etc. never sets this.
+  let userPaused = false;
+
   function setPlay(state) {
     if (state) {
       audio.muted = false;
       audio.play().catch(()=>{});
       disc.classList.add('playing');   // starts vinylSpin — the cover spins with it, no separate animation needed
-      playIcon.textContent = '⏸';
+      setIcon(true);
+      userPaused = false;
     } else {
       audio.pause();
       disc.classList.remove('playing'); // pauses the spin immediately
-      playIcon.textContent = '▶';
+      setIcon(false);
+      userPaused = true;
     }
     saveState(state ? 'playing' : 'paused');
   }
@@ -106,12 +120,14 @@ function initVinyl() {
     if (s.state === 'paused' && !audio.paused) {
       audio.pause();
       disc.classList.remove('playing');
-      playIcon.textContent = '▶';
+      setIcon(false);
+      userPaused = true;
     } else if (s.state === 'playing' && audio.paused) {
       audio.muted = false;
       audio.play().then(() => {
         disc.classList.add('playing');
-        playIcon.textContent = '⏸';
+        setIcon(true);
+        userPaused = false;
       }).catch(()=>{});
     }
   });
@@ -122,10 +138,10 @@ function initVinyl() {
     audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
   });
 
-  // Autoplay when the song section scrolls into view (first-ever visit only).
-  // After that, playback is controlled ONLY by the Pause button and the
-  // persisted state above — scrolling away, switching tabs, or refreshing
-  // must never silently override a choice the visitor already made.
+  // Autoplay EVERY time the song section scrolls into view. The only thing
+  // that can keep the music silent is the visitor explicitly hitting the
+  // pause button (userPaused === true) — scrolling away and back, tab
+  // switches, and refreshes never count as "stopping" it.
   //
   // Browsers reliably allow MUTED autoplay but usually block unmuted
   // autoplay without a user gesture. To avoid the song silently failing
@@ -137,7 +153,7 @@ function initVinyl() {
 
   function markPlaying() {
     disc.classList.add('playing');
-    playIcon.textContent = '⏸';
+    setIcon(true);
     saveState('playing');
   }
 
@@ -146,7 +162,7 @@ function initVinyl() {
     unmuteArmed = true;
     const unmute = () => {
       audio.muted = false;
-      if (audio.paused) audio.play().catch(()=>{});
+      if (audio.paused && !userPaused) audio.play().catch(()=>{});
       ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'].forEach(evt =>
         document.removeEventListener(evt, unmute)
       );
@@ -157,7 +173,7 @@ function initVinyl() {
   }
 
   function startMutedFallback() {
-    if (!audio.paused) return;
+    if (!audio.paused || userPaused) return;
     audio.muted = true;
     const p = audio.play();
     if (p && p.then) {
@@ -166,7 +182,7 @@ function initVinyl() {
   }
 
   function attemptAutoplay() {
-    if (!audio.paused) return;
+    if (!audio.paused || userPaused) return; // never override an explicit pause
     audio.muted = false;
     const p = audio.play();
     if (p && p.then) {
@@ -180,33 +196,31 @@ function initVinyl() {
   const saved = loadState();
 
   if (saved && saved.state === 'paused') {
-    // The visitor explicitly paused before this refresh — respect that.
-    // Restore the position they were at, but do NOT auto-resume, and
-    // don't even attach the scroll-triggered autoplay watcher: the
-    // visitor already made their choice, so autoplay must stay silent.
+    // The visitor explicitly paused before this refresh — respect that
+    // and restore the position they were at, but do NOT auto-resume.
     restoreTime(saved.time);
     disc.classList.remove('playing');
-    playIcon.textContent = '▶';
+    setIcon(false);
+    userPaused = true;
   } else if (saved && saved.state === 'playing') {
     // It was playing before this refresh — resume right away instead of
     // waiting for the visitor to scroll back down to the song section.
     restoreTime(saved.time);
     attemptAutoplay();
-  } else {
-    // First-ever visit on this device — autoplay the moment the song
-    // section scrolls into view, exactly as before.
-    const songSection = document.getElementById('sec3');
-    if (songSection) {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            attemptAutoplay();
-            obs.unobserve(songSection); // only ever auto-triggers once — from here on, only the button/persisted state controls playback
-          }
-        });
-      }, { threshold: 0.45 });
-      obs.observe(songSection);
-    }
+  }
+
+  // Watch the song section and (re)play any time it scrolls into view —
+  // this fires on every entry, not just the first, but attemptAutoplay()
+  // itself is a no-op once the visitor has paused, so it can never
+  // silently override that choice.
+  const songSection = document.getElementById('sec3');
+  if (songSection) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) attemptAutoplay();
+      });
+    }, { threshold: 0.45 });
+    obs.observe(songSection);
   }
 }
 

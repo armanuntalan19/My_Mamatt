@@ -384,9 +384,16 @@ html, body {
   display:flex; align-items:center; justify-content:center;
   box-shadow:0 4px 16px rgba(194,59,106,0.35);
   transition:transform 0.2s, box-shadow 0.2s;
-  padding-left:2px;
+  padding:0; line-height:1;
 }
 .vinyl-btn:hover { transform:scale(1.1); box-shadow:0 6px 22px rgba(194,59,106,0.5); }
+.vinyl-btn #playIcon {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:100%; height:100%;
+}
+/* ▶ carries more visual weight on its right edge than ⏸, so nudge only
+   the play glyph a hair to keep it optically centered inside the circle */
+.vinyl-btn #playIcon.icon-play { transform: translateX(1px); }
 .vinyl-progress-wrap { flex:1; display:flex; flex-direction:column; gap:4px; }
 .vinyl-progress-bar { width:100%; height:5px; background:rgba(194,59,106,0.15); border-radius:3px; overflow:hidden; cursor:pointer; }
 .vinyl-progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--rose-deep),var(--rose)); border-radius:3px; transition:width 0.3s linear; }
