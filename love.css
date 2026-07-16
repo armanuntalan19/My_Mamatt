@@ -507,68 +507,107 @@ html, body {
 /* ═══════════════════════════════════════
    ENVELOPE / MESSAGE
    ═══════════════════════════════════════ */
-.envelope-scene { position:relative; max-width:480px; margin:0 auto; }
+.envelope-scene { position:relative; max-width:700px; margin:0 auto; }
 
 .envelope {
+  max-width:560px; margin:0 auto;
   cursor:pointer; user-select:none;
   transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1), filter 0.35s ease;
-  filter: drop-shadow(0 10px 26px rgba(194,59,106,0.16));
+  filter: drop-shadow(0 14px 32px rgba(194,59,106,0.2));
 }
 .envelope:hover {
-  transform:scale(1.025) rotate(-0.6deg) translateY(-3px);
-  filter: drop-shadow(0 16px 34px rgba(194,59,106,0.24));
+  transform:scale(1.02) rotate(-0.5deg) translateY(-4px);
+  filter: drop-shadow(0 20px 42px rgba(194,59,106,0.28));
 }
 .envelope.opened:hover { transform:none; }
 
 .env-body {
   position:relative; width:100%;
-  padding-bottom:62%;
-  background:linear-gradient(160deg,#fff6f9,#fce8f0);
-  border-radius:6px;
+  padding-bottom:60%;
+  background:linear-gradient(160deg,#fffaf4,#fce3ef 55%,#f8d3e6);
+  border-radius:8px;
   box-shadow:
     0 0 0 1.5px var(--gold-lt),
     0 0 0 3.5px #fff,
-    0 0 0 5.5px rgba(201,146,46,0.22),
-    0 20px 50px -14px rgba(194,59,106,0.3);
+    0 0 0 5.5px rgba(201,146,46,0.28),
+    inset 0 0 0 1px rgba(255,255,255,0.5),
+    0 24px 60px -16px rgba(194,59,106,0.34);
   overflow:hidden;
+}
+/* faint paper-grain texture, purely decorative */
+.env-body::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:repeating-linear-gradient(115deg, rgba(255,255,255,0.4) 0 2px, transparent 2px 6px);
+  opacity:0.3; mix-blend-mode:overlay;
+}
+/* Thin gold trim tracing the inner edge, echoing the picture-frame corners */
+.env-body::after {
+  content:''; position:absolute; inset:7px; pointer-events:none; z-index:4;
+  border:1px solid rgba(201,146,46,0.32); border-radius:4px;
 }
 /* Envelope back — the folds sit here, drawn with clip-path so
    they scale proportionally with the envelope at any width. */
-.env-fold {
-  position:absolute; inset:0;
-  background:linear-gradient(160deg,#f7c9dc,#f2b3cc);
+.env-fold { position:absolute; inset:0; }
+.env-fold-l {
+  clip-path: polygon(0 100%, 0 32%, 52% 100%);
+  background:linear-gradient(155deg,#f4c3d8,#eda9c6);
 }
-.env-fold-l { clip-path: polygon(0 100%, 0 34%, 52% 100%); }
 .env-fold-r {
-  clip-path: polygon(100% 100%, 100% 34%, 48% 100%);
-  background:linear-gradient(200deg,#f9d0df,#f4bdd2);
+  clip-path: polygon(100% 100%, 100% 32%, 48% 100%);
+  background:linear-gradient(205deg,#f7cede,#efb2cc);
 }
 .env-fold-b {
-  clip-path: polygon(0 100%, 100% 100%, 100% 42%, 50% 78%, 0 42%);
-  background:linear-gradient(180deg,#fbdae8,#f6c4d9);
+  clip-path: polygon(0 100%, 100% 100%, 100% 40%, 50% 76%, 0 40%);
+  background:linear-gradient(180deg,#fbdbe9,#f3bfd8);
+  box-shadow: inset 0 10px 18px -12px rgba(140,40,80,0.3);
 }
 /* Envelope flap (triangle top) */
 .env-flap {
-  position:absolute; top:0; left:0; right:0; height:56%;
-  background:linear-gradient(160deg,#fdeef4,#f8ccdd);
-  clip-path:polygon(0 0, 100% 0, 50% 74%);
+  position:absolute; top:0; left:0; right:0; height:54%;
+  background:linear-gradient(160deg,#fff3f7,#f6c9dd);
+  clip-path:polygon(0 0, 100% 0, 50% 76%);
   transform-origin:top center;
   transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: inset 0 -1px 0 rgba(194,59,106,0.08);
+  box-shadow: inset 0 -1px 0 rgba(194,59,106,0.1);
   z-index:2;
+}
+/* Faint inner border tracing the flap's fold line for a lined-envelope feel */
+.env-flap::after {
+  content:''; position:absolute; left:7%; right:7%; top:7%; bottom:16%;
+  border:1px solid rgba(201,146,46,0.28);
+  clip-path:polygon(0 0, 100% 0, 50.5% 88%);
+  pointer-events:none;
 }
 .envelope.opened .env-flap { transform:rotateX(180deg); }
 
+/* Postage stamp, tucked in the top-right corner */
+.env-stamp {
+  position:absolute; top:5%; right:6%; z-index:3;
+  width:13%; aspect-ratio:5/6;
+  background:linear-gradient(150deg,#fff,#fdf1f6);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem; color:var(--rose-deep);
+  border:1.5px dashed rgba(201,146,46,0.55);
+  border-radius:2px;
+  transform:rotate(5deg);
+  box-shadow:0 3px 10px rgba(194,59,106,0.18);
+  opacity:0.9;
+  transition:opacity 0.3s ease, transform 0.3s ease;
+}
+.envelope.opened .env-stamp { opacity:0; transform:rotate(5deg) scale(0.85); }
+
 .env-seal {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:54px; height:54px; border-radius:50%;
-  background:radial-gradient(circle at 35% 30%, var(--rose), var(--rose-deep) 70%);
+  width:58px; height:58px; border-radius:50%;
+  background:radial-gradient(circle at 32% 28%, var(--rose), var(--rose-deep) 72%);
   display:flex; align-items:center; justify-content:center;
-  font-size:1.5rem; z-index:3;
+  font-size:1.55rem; z-index:3; color:#fff;
   box-shadow:
-    0 0 0 3px rgba(255,255,255,0.55),
-    0 0 0 4.5px rgba(201,146,46,0.35),
-    0 6px 18px rgba(194,59,106,0.4);
+    0 0 0 3px rgba(255,255,255,0.6),
+    0 0 0 4.5px rgba(201,146,46,0.4),
+    inset 0 2px 4px rgba(255,255,255,0.35),
+    inset 0 -3px 6px rgba(120,20,55,0.35),
+    0 8px 20px rgba(194,59,106,0.45);
   transition:transform 0.3s ease, opacity 0.3s ease;
   animation: sealPulse 2.6s ease-in-out infinite;
 }
@@ -583,7 +622,7 @@ html, body {
   display:flex; align-items:center; justify-content:center; gap:0.7rem;
   font-family:'Jost',sans-serif; font-weight:300;
   font-size:0.8rem; letter-spacing:3px; text-transform:uppercase;
-  color:var(--rose-deep); margin-top:1.1rem; opacity:0.65;
+  color:var(--rose-deep); margin-top:1.2rem; opacity:0.65;
   transition:opacity 0.3s ease;
 }
 .envelope.opened .env-hint { opacity:0; }
@@ -596,7 +635,7 @@ html, body {
 /* Letter (collapsed to zero height until opened — no reserved
    empty space beneath the envelope while it's still closed) */
 .letter {
-  max-width:480px; margin:0 auto;
+  max-width:700px; margin:0 auto;
   display:grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.6s cubic-bezier(0.34,1.15,0.64,1), margin-top 0.6s ease;
@@ -623,16 +662,24 @@ html, body {
 .letter.revealed .letter-frame { opacity:1; transform:translateY(0) scale(1); }
 .letter-inner {
   background:linear-gradient(160deg,#fff9fb,var(--cream));
-  padding:2.5rem 2.2rem; border-radius:2px; text-align:left;
+  border-left:3.5px solid var(--rose-deep);
+  border-radius:2px; padding:2.5rem 2rem 2.5rem 2.8rem;
+  position:relative; text-align:left;
+}
+.letter-open-quote {
+  font-family:'Cormorant Garamond',serif; font-size:7rem;
+  color:var(--rose-pale); position:absolute;
+  top:-1.8rem; left:0.6rem; line-height:1; pointer-events:none;
 }
 .letter-salutation {
   font-family:'Great Vibes',cursive; font-size:1.8rem;
   color:var(--rose-deep); margin-bottom:1.2rem;
+  position:relative; z-index:1;
 }
 .letter-inner p {
   font-family:'Jost',sans-serif; font-weight:300;
   font-size:1.04rem; line-height:2; color:var(--ink); opacity:0.84;
-  margin-bottom:0.9rem;
+  margin-bottom:0.9rem; position:relative; z-index:1;
 }
 .letter-sign {
   display:block; font-family:'Great Vibes',cursive;
