@@ -574,8 +574,21 @@ html, body {
 }
 .envelope.opened .env-flap { transform:rotateX(180deg); }
 
-
-.envelope.opened { opacity:0; transform:rotate(5deg) scale(0.85); }
+/* Postage stamp, tucked in the top-right corner */
+.env-stamp {
+  position:absolute; top:5%; right:6%; z-index:3;
+  width:13%; aspect-ratio:5/6;
+  background:linear-gradient(150deg,#fff,#fdf1f6);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem; color:var(--rose-deep);
+  border:1.5px dashed rgba(201,146,46,0.55);
+  border-radius:2px;
+  transform:rotate(5deg);
+  box-shadow:0 3px 10px rgba(194,59,106,0.18);
+  opacity:0.9;
+  transition:opacity 0.3s ease, transform 0.3s ease;
+}
+.envelope.opened .env-stamp { opacity:0; transform:rotate(5deg) scale(0.85); }
 
 .env-seal {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -780,7 +793,7 @@ html, body {
    card edges — spacing tightens, image sizes don't. ── */
 @media (max-width:480px) {
   .sec-inner { padding: 3.4rem 1.3rem; }
-  .photo-grid { max-width: 100%; gap: 1.1rem; }
+  .photo-grid { max-width: 100%; gap: 0.9rem; }
   .love-row { gap: 0.9rem; }
   .love-img-wrap { max-width: 100%; }
   .photo-frame-wrap, .love-img-wrap { padding: 5px; }

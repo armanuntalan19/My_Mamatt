@@ -32,56 +32,36 @@ function initVinyl() {
     playIcon.classList.toggle('icon-play', !isPlaying);
   }
 
-  /* ── Persisted music state ────────────────────────────────
-     Survives page refreshes and stays in sync across every page/tab
-     that shares this origin — the source of truth lives in
-     localStorage instead of only in memory, so a reload can never
-     "forget" that the visitor paused the song. */
-  const STORAGE_KEY = 'mamattMusicState';
+  // No persistence on purpose: every fresh open/refresh of the site
+  // should start the song from 0:00, never resume a previous position.
+  audio.currentTime = 0;
 
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) { return null; } // localStorage unavailable (private mode, etc.) — degrade gracefully
-  }
-
-  function saveState(state) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        state,                    // 'playing' | 'paused'
-        time: audio.currentTime,  // resume near where it left off
-        savedAt: Date.now()
-      }));
-    } catch (e) { /* ignore — playback still works, it just won't persist */ }
-  }
-
-  function restoreTime(t) {
-    if (typeof t !== 'number' || !isFinite(t) || t <= 0) return;
-    const apply = () => { try { audio.currentTime = t; } catch (e) {} };
-    if (audio.readyState >= 1) apply(); // HAVE_METADATA already available
-    else audio.addEventListener('loadedmetadata', apply, { once: true });
-  }
-
-  // True only when the visitor themselves hit the pause button — this is
+  // True only when the visitor themselves hits the pause button — this is
   // the ONLY thing that's allowed to keep the song silent. Scrolling away
-  // from the section, switching tabs, etc. never sets this.
+  // from the section, switching tabs, etc. never sets this, so playback
+  // (once started) keeps going until the visitor chooses to pause it.
   let userPaused = false;
+
+  function markPlaying() {
+    disc.classList.add('playing');
+    setIcon(true);
+  }
+
+  function markPaused() {
+    disc.classList.remove('playing');
+    setIcon(false);
+  }
 
   function setPlay(state) {
     if (state) {
-      audio.muted = false;
-      audio.play().catch(()=>{});
-      disc.classList.add('playing');   // starts vinylSpin — the cover spins with it, no separate animation needed
-      setIcon(true);
       userPaused = false;
+      audio.muted = false;
+      audio.play().then(markPlaying).catch(startMutedFallback);
     } else {
-      audio.pause();
-      disc.classList.remove('playing'); // pauses the spin immediately
-      setIcon(false);
       userPaused = true;
+      audio.pause();
+      markPaused();
     }
-    saveState(state ? 'playing' : 'paused');
   }
 
   playBtn.addEventListener('click', () => setPlay(audio.paused));
@@ -92,56 +72,16 @@ function initVinyl() {
     timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
   });
 
-  // Keep the saved position fresh while playing (throttled) so a refresh
-  // resumes close to where the visitor actually left off.
-  let lastSave = 0;
-  audio.addEventListener('timeupdate', () => {
-    const now = Date.now();
-    if (now - lastSave > 3000) {
-      lastSave = now;
-      saveState(audio.paused ? 'paused' : 'playing');
-    }
-  });
-
-  // Belt-and-suspenders: also snapshot state right before the tab/page
-  // goes away, so a refresh or close never leaves stale/half-written state.
-  const snapshot = () => saveState(audio.paused ? 'paused' : 'playing');
-  window.addEventListener('pagehide', snapshot);
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') snapshot();
-  });
-
-  // Keep multiple tabs/pages of the site in sync: if the song is
-  // paused/played in one tab, mirror it here instantly.
-  window.addEventListener('storage', e => {
-    if (e.key !== STORAGE_KEY || !e.newValue) return;
-    let s;
-    try { s = JSON.parse(e.newValue); } catch (err) { return; }
-    if (s.state === 'paused' && !audio.paused) {
-      audio.pause();
-      disc.classList.remove('playing');
-      setIcon(false);
-      userPaused = true;
-    } else if (s.state === 'playing' && audio.paused) {
-      audio.muted = false;
-      audio.play().then(() => {
-        disc.classList.add('playing');
-        setIcon(true);
-        userPaused = false;
-      }).catch(()=>{});
-    }
-  });
-
   bar.addEventListener('click', e => {
     if (!audio.duration) return;
     const r = bar.getBoundingClientRect();
     audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
   });
 
-  // Autoplay EVERY time the song section scrolls into view. The only thing
-  // that can keep the music silent is the visitor explicitly hitting the
-  // pause button (userPaused === true) — scrolling away and back, tab
-  // switches, and refreshes never count as "stopping" it.
+  // Autoplay the FIRST time the song section scrolls into view. The only
+  // thing that can keep the music silent afterwards is the visitor
+  // explicitly hitting the pause button (userPaused === true) — scrolling
+  // away and back, tab switches, etc. never stop it once it has started.
   //
   // Browsers reliably allow MUTED autoplay but usually block unmuted
   // autoplay without a user gesture. To avoid the song silently failing
@@ -151,18 +91,12 @@ function initVinyl() {
   // anywhere on the page — no restart, it just gains sound.
   let unmuteArmed = false;
 
-  function markPlaying() {
-    disc.classList.add('playing');
-    setIcon(true);
-    saveState('playing');
-  }
-
   function armUnmuteOnGesture() {
     if (unmuteArmed) return;
     unmuteArmed = true;
     const unmute = () => {
       audio.muted = false;
-      if (audio.paused && !userPaused) audio.play().catch(()=>{});
+      if (audio.paused && !userPaused) audio.play().then(markPlaying).catch(()=>{});
       ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'].forEach(evt =>
         document.removeEventListener(evt, unmute)
       );
@@ -193,33 +127,17 @@ function initVinyl() {
     }
   }
 
-  const saved = loadState();
-
-  if (saved && saved.state === 'paused') {
-    // The visitor explicitly paused before this refresh — respect that
-    // and restore the position they were at, but do NOT auto-resume.
-    restoreTime(saved.time);
-    disc.classList.remove('playing');
-    setIcon(false);
-    userPaused = true;
-  } else if (saved && saved.state === 'playing') {
-    // It was playing before this refresh — resume right away instead of
-    // waiting for the visitor to scroll back down to the song section.
-    restoreTime(saved.time);
-    attemptAutoplay();
-  }
-
-  // Watch the song section and (re)play any time it scrolls into view —
-  // this fires on every entry, not just the first, but attemptAutoplay()
-  // itself is a no-op once the visitor has paused, so it can never
-  // silently override that choice.
+  // Watch the song section and try to start playback any time it scrolls
+  // into view. attemptAutoplay() is a no-op once the visitor has paused
+  // or once the song is already playing, so this can never restart the
+  // track or silently override an explicit pause.
   const songSection = document.getElementById('sec3');
   if (songSection) {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) attemptAutoplay();
       });
-    }, { threshold: 0.45 });
+    }, { threshold: 0.4 });
     obs.observe(songSection);
   }
 }
