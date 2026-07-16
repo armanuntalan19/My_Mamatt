@@ -793,7 +793,7 @@ html, body {
    card edges — spacing tightens, image sizes don't. ── */
 @media (max-width:480px) {
   .sec-inner { padding: 3.4rem 1.3rem; }
-  .photo-grid { max-width: 100%; gap: 0.9rem; }
+  .photo-grid { max-width: 100%; gap: 1.1rem; }
   .love-row { gap: 0.9rem; }
   .love-img-wrap { max-width: 100%; }
   .photo-frame-wrap, .love-img-wrap { padding: 5px; }
