@@ -56,7 +56,12 @@ function initVinyl() {
     if (state) {
       userPaused = false;
       audio.muted = false;
-      audio.play().then(markPlaying).catch(() => startMutedFallback());
+      audio.play().then(() => {
+        markPlaying();
+        started = true;
+        unlocked = true;
+        deactivateUnlockListeners();
+      }).catch(() => startMutedFallback());
     } else {
       userPaused = true;
       audio.pause();
@@ -88,56 +93,60 @@ function initVinyl() {
   // without a prior user gesture. It only blocks UNMUTED autoplay when
   // there's no recent user activation — which is exactly what happens on
   // a hard refresh (a reload carries no "gesture" with it, unlike the
-  // swipe/click that first navigates here from the cover page). Trying
-  // unmuted first made refresh unreliable, because that path depended on
-  // the fallback firing correctly. So we now always start muted first
-  // (guaranteed to succeed) and immediately try to escalate to sound —
-  // if that escalation is blocked, we keep the muted playback running
-  // (disc still spins, progress still ticks) and unmute the instant the
-  // visitor makes any gesture anywhere on the page — no restart, it just
-  // gains sound.
+  // swipe/click that first navigates here from the cover page). So we
+  // always start muted first (guaranteed to succeed) and immediately try
+  // to escalate to sound. If that escalation is blocked, we keep the
+  // muted playback running (disc still spins, progress still ticks) and
+  // unmute on the visitor's next gesture — but ONLY a gesture that
+  // happens on the song section itself, while it's actually on screen.
+  // Interacting with some other part of the site, far from this
+  // section, should never be what turns the sound on.
+  const songSection = document.getElementById('sec3');
   let started = false;
-  let unmuteArmed = false;
+  let unlocked = false;
+  let listenersActive = false;
+  const unlockEvents = ['pointerdown', 'touchend', 'click', 'keydown', 'wheel'];
 
-  function armUnmuteOnGesture() {
-    if (unmuteArmed) return;
-    unmuteArmed = true;
-    const events = ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'];
-    const unmute = () => {
-      if (!userPaused) {
-        audio.muted = false;
-        if (audio.paused) audio.play().then(markPlaying).catch(() => {});
-      }
-      events.forEach(evt => document.removeEventListener(evt, unmute));
-    };
-    events.forEach(evt => document.addEventListener(evt, unmute, { passive: true }));
-  }
-
-  function escalateToSound() {
-    if (userPaused) return;
+  function tryUnlock() {
+    if (unlocked || userPaused) return;
     audio.muted = false;
     const p = audio.play();
-    if (p && p.then) {
-      p.catch(() => {
-        // Sound still blocked (no user gesture yet) — stay muted and
-        // silently running; wait for the visitor's first interaction.
-        audio.muted = true;
-        armUnmuteOnGesture();
-      });
-    }
+    const done = () => { unlocked = true; markPlaying(); deactivateUnlockListeners(); };
+    if (p && p.then) p.then(done).catch(() => { audio.muted = true; });
+    else done();
+  }
+
+  function activateUnlockListeners() {
+    if (listenersActive || unlocked || !songSection) return;
+    listenersActive = true;
+    unlockEvents.forEach(evt => songSection.addEventListener(evt, tryUnlock, { passive: true }));
+  }
+
+  function deactivateUnlockListeners() {
+    if (!listenersActive || !songSection) return;
+    listenersActive = false;
+    unlockEvents.forEach(evt => songSection.removeEventListener(evt, tryUnlock));
   }
 
   function startMutedFallback() {
     if (started || userPaused) return;
     audio.muted = true;
     const p = audio.play();
-    const onStarted = () => { started = true; markPlaying(); escalateToSound(); };
+    const onStarted = () => {
+      started = true;
+      markPlaying();
+      tryUnlock();               // try immediately — we're on the section right now
+      if (!unlocked) activateUnlockListeners(); // else wait for a gesture, but only on this section
+    };
     if (p && p.then) {
       p.then(onStarted).catch(() => {
-        // Even muted autoplay was blocked (very rare) — retry on the
-        // visitor's first interaction instead of giving up silently.
-        document.addEventListener('pointerdown', () => startMutedFallback(), { once: true, passive: true });
-        document.addEventListener('touchend',   () => startMutedFallback(), { once: true, passive: true });
+        // Even muted autoplay was blocked (very rare) — retry the next
+        // time the visitor interacts with the song section.
+        if (songSection) {
+          const retry = () => { songSection.removeEventListener('pointerdown', retry); songSection.removeEventListener('touchend', retry); startMutedFallback(); };
+          songSection.addEventListener('pointerdown', retry, { once: true, passive: true });
+          songSection.addEventListener('touchend', retry, { once: true, passive: true });
+        }
       });
     } else {
       onStarted();
@@ -149,17 +158,19 @@ function initVinyl() {
     startMutedFallback();
   }
 
-  // Watch the song section and try to start playback any time it scrolls
-  // into view. attemptAutoplay() is a no-op once the song has started or
-  // the visitor has paused, so this can never restart the track or
-  // silently override an explicit pause. We keep observing (rather than
-  // disconnecting after the first hit) purely as a safety net in case the
-  // very first attempt is retried above.
-  const songSection = document.getElementById('sec3');
+  // Watch the song section: start playback (and arm the sound-unlock
+  // listeners) whenever it's on screen; disarm those listeners the
+  // moment it scrolls out of view, so a gesture elsewhere on the site
+  // can never be what turns the sound on.
   if (songSection) {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) attemptAutoplay();
+        if (e.isIntersecting) {
+          attemptAutoplay();
+          if (started && !unlocked) activateUnlockListeners();
+        } else {
+          deactivateUnlockListeners();
+        }
       });
     }, { threshold: 0.4 });
     obs.observe(songSection);
