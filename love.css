@@ -540,18 +540,23 @@ html, body {
   border:1px solid rgba(201,146,46,0.32); border-radius:4px;
 }
 /* Envelope back — the folds sit here, drawn with clip-path so
-   they scale proportionally with the envelope at any width. */
+   they scale proportionally with the envelope at any width.
+   All four seams (this trio + the .env-flap on top) are triangles
+   that share one full edge of the envelope as their base and meet
+   at the SAME center point (50%, 41.04% — matching the flap's own
+   tip, 76% down its 54%-tall box) so the closed envelope reads as
+   one continuous seamed shape with no gaps or color breaks. */
 .env-fold { position:absolute; inset:0; }
 .env-fold-l {
-  clip-path: polygon(0 100%, 0 32%, 52% 100%);
-  background:linear-gradient(155deg,#f4c3d8,#eda9c6);
+  clip-path: polygon(0 0, 0 100%, 50% 41.04%);
+  background:linear-gradient(100deg,#f6cbdd,#eeacc8);
 }
 .env-fold-r {
-  clip-path: polygon(100% 100%, 100% 32%, 48% 100%);
-  background:linear-gradient(205deg,#f7cede,#efb2cc);
+  clip-path: polygon(100% 0, 100% 100%, 50% 41.04%);
+  background:linear-gradient(100deg,#f6cbdd,#eeacc8);
 }
 .env-fold-b {
-  clip-path: polygon(0 100%, 100% 100%, 100% 40%, 50% 76%, 0 40%);
+  clip-path: polygon(0 100%, 100% 100%, 50% 41.04%);
   background:linear-gradient(180deg,#fbdbe9,#f3bfd8);
   box-shadow: inset 0 10px 18px -12px rgba(140,40,80,0.3);
 }

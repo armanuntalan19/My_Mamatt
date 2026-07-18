@@ -56,7 +56,7 @@ function initVinyl() {
     if (state) {
       userPaused = false;
       audio.muted = false;
-      audio.play().then(markPlaying).catch(startMutedFallback);
+      audio.play().then(markPlaying).catch(() => startMutedFallback());
     } else {
       userPaused = true;
       audio.pause();
@@ -81,56 +81,80 @@ function initVinyl() {
   // Autoplay the FIRST time the song section scrolls into view. The only
   // thing that can keep the music silent afterwards is the visitor
   // explicitly hitting the pause button (userPaused === true) — scrolling
-  // away and back, tab switches, etc. never stop it once it has started.
+  // away and back, tab switches, page refreshes, etc. never stop it once
+  // it has started.
   //
-  // Browsers reliably allow MUTED autoplay but usually block unmuted
-  // autoplay without a user gesture. To avoid the song silently failing
-  // to start, we try unmuted first; if that's blocked we immediately
-  // fall back to starting it muted (so the disc + timeline are already
-  // running) and unmute the instant the visitor makes any gesture
-  // anywhere on the page — no restart, it just gains sound.
+  // IMPORTANT: Chrome ALWAYS allows a MUTED play() to start, with or
+  // without a prior user gesture. It only blocks UNMUTED autoplay when
+  // there's no recent user activation — which is exactly what happens on
+  // a hard refresh (a reload carries no "gesture" with it, unlike the
+  // swipe/click that first navigates here from the cover page). Trying
+  // unmuted first made refresh unreliable, because that path depended on
+  // the fallback firing correctly. So we now always start muted first
+  // (guaranteed to succeed) and immediately try to escalate to sound —
+  // if that escalation is blocked, we keep the muted playback running
+  // (disc still spins, progress still ticks) and unmute the instant the
+  // visitor makes any gesture anywhere on the page — no restart, it just
+  // gains sound.
+  let started = false;
   let unmuteArmed = false;
 
   function armUnmuteOnGesture() {
     if (unmuteArmed) return;
     unmuteArmed = true;
+    const events = ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'];
     const unmute = () => {
-      audio.muted = false;
-      if (audio.paused && !userPaused) audio.play().then(markPlaying).catch(()=>{});
-      ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'].forEach(evt =>
-        document.removeEventListener(evt, unmute)
-      );
+      if (!userPaused) {
+        audio.muted = false;
+        if (audio.paused) audio.play().then(markPlaying).catch(() => {});
+      }
+      events.forEach(evt => document.removeEventListener(evt, unmute));
     };
-    ['pointerdown', 'touchend', 'click', 'keydown', 'scroll', 'wheel'].forEach(evt =>
-      document.addEventListener(evt, unmute, { passive: true })
-    );
+    events.forEach(evt => document.addEventListener(evt, unmute, { passive: true }));
+  }
+
+  function escalateToSound() {
+    if (userPaused) return;
+    audio.muted = false;
+    const p = audio.play();
+    if (p && p.then) {
+      p.catch(() => {
+        // Sound still blocked (no user gesture yet) — stay muted and
+        // silently running; wait for the visitor's first interaction.
+        audio.muted = true;
+        armUnmuteOnGesture();
+      });
+    }
   }
 
   function startMutedFallback() {
-    if (!audio.paused || userPaused) return;
+    if (started || userPaused) return;
     audio.muted = true;
     const p = audio.play();
+    const onStarted = () => { started = true; markPlaying(); escalateToSound(); };
     if (p && p.then) {
-      p.then(() => { markPlaying(); armUnmuteOnGesture(); }).catch(() => {});
+      p.then(onStarted).catch(() => {
+        // Even muted autoplay was blocked (very rare) — retry on the
+        // visitor's first interaction instead of giving up silently.
+        document.addEventListener('pointerdown', () => startMutedFallback(), { once: true, passive: true });
+        document.addEventListener('touchend',   () => startMutedFallback(), { once: true, passive: true });
+      });
+    } else {
+      onStarted();
     }
   }
 
   function attemptAutoplay() {
-    if (!audio.paused || userPaused) return; // never override an explicit pause
-    audio.muted = false;
-    const p = audio.play();
-    if (p && p.then) {
-      p.then(markPlaying).catch(startMutedFallback);
-    } else {
-      // Older browsers without a promise-based play(): assume it worked.
-      markPlaying();
-    }
+    if (started || userPaused) return; // never override an explicit pause or double-start
+    startMutedFallback();
   }
 
   // Watch the song section and try to start playback any time it scrolls
-  // into view. attemptAutoplay() is a no-op once the visitor has paused
-  // or once the song is already playing, so this can never restart the
-  // track or silently override an explicit pause.
+  // into view. attemptAutoplay() is a no-op once the song has started or
+  // the visitor has paused, so this can never restart the track or
+  // silently override an explicit pause. We keep observing (rather than
+  // disconnecting after the first hit) purely as a safety net in case the
+  // very first attempt is retried above.
   const songSection = document.getElementById('sec3');
   if (songSection) {
     const obs = new IntersectionObserver(entries => {
