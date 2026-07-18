@@ -512,22 +512,28 @@ html, body {
 .envelope {
   max-width:560px; margin:0 auto;
   cursor:pointer; user-select:none;
-  perspective: 1400px;
-  transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1), filter 0.5s ease;
+  perspective: 900px;
+  transition:filter 0.5s ease;
   filter: drop-shadow(0 14px 32px rgba(194,59,106,0.2));
 }
 .envelope:hover {
   transform:scale(1.02) rotate(-0.5deg) translateY(-4px);
   filter: drop-shadow(0 20px 42px rgba(194,59,106,0.28));
 }
-/* Opened state gets its own visible lift + deeper shadow — a clear,
-   lasting cue (beyond the flap swing itself) that the envelope has
-   changed state, rather than snapping back to looking identical. */
+/* A theatrical, springy pop — the whole envelope lifts, overshoots,
+   and settles — so opening reads as a clear, unmissable event rather
+   than a subtle flap flip. Runs once via animation (not a transition)
+   so the overshoot/settle motion is guaranteed to play in full. */
+@keyframes envelopePop {
+  0%   { transform:scale(1)     translateY(0)    rotate(0deg); }
+  35%  { transform:scale(1.07)  translateY(-16px) rotate(-1.4deg); }
+  60%  { transform:scale(1.015) translateY(-6px)  rotate(0.6deg); }
+  100% { transform:scale(1.035) translateY(-10px) rotate(0deg); }
+}
 .envelope.opened {
-  transform:scale(1.035) translateY(-10px);
+  animation: envelopePop 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;
   filter: drop-shadow(0 26px 48px rgba(194,59,106,0.32));
 }
-.envelope.opened:hover { transform:scale(1.035) translateY(-10px); }
 
 .env-body {
   position:relative; width:100%;
@@ -540,7 +546,13 @@ html, body {
     0 0 0 5.5px rgba(201,146,46,0.28),
     inset 0 0 0 1px rgba(255,255,255,0.5),
     0 24px 60px -16px rgba(194,59,106,0.34);
-  overflow:hidden;
+}
+/* Everything that must stay confined to the envelope's rounded silhouette
+   (corner accents, back-folds) is clipped here — kept deliberately
+   separate from .env-body so the flap (a sibling, below) is free to
+   swing open in full 3D without being cut off by this clip. */
+.env-clip {
+  position:absolute; inset:0; overflow:hidden; border-radius:8px;
 }
 /* Thin gold trim tracing the inner edge, echoing the picture-frame corners */
 .env-body::after {
@@ -568,14 +580,14 @@ html, body {
   background:linear-gradient(180deg,#fbdbe9,#f3bfd8);
   box-shadow: inset 0 10px 18px -12px rgba(140,40,80,0.3);
 }
-/* Envelope flap (triangle top) */
+/* Envelope flap (triangle top) — a sibling of .env-clip, not a child,
+   so its 3D swing is never cut off by the rounded-corner clip. */
 .env-flap {
   position:absolute; top:0; left:0; right:0; height:54%;
   background:linear-gradient(160deg,#fff3f7,#f6c9dd);
   clip-path:polygon(0 0, 100% 0, 50% 76%);
   transform-origin:top center;
   transform-style:preserve-3d;
-  transition:transform 0.85s cubic-bezier(0.34,1.42,0.4,1);
   box-shadow: inset 0 -1px 0 rgba(194,59,106,0.1);
   z-index:2;
 }
@@ -586,7 +598,17 @@ html, body {
   clip-path:polygon(0 0, 100% 0, 50.5% 88%);
   pointer-events:none;
 }
-.envelope.opened .env-flap { transform:rotateX(200deg); }
+/* The flap's own swing: a bigger, springier overshoot (past vertical,
+   past flat, then a slight settle-back) so the fold is unmistakably
+   visible rather than a quick, subtle flip. */
+@keyframes flapOpen {
+  0%   { transform:rotateX(0deg); }
+  55%  { transform:rotateX(222deg); }
+  100% { transform:rotateX(198deg); }
+}
+.envelope.opened .env-flap {
+  animation: flapOpen 0.85s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
 
 
 
